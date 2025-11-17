@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemAI - Învățare Personalizată la Chimie</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4cb5ae;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(74, 111, 165, 0.8), rgba(22, 96, 136, 0.9)), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #3a9a94;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .demo {
+            background-color: #f0f5ff;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .demo-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .demo-visual {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .molecule {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .molecule-structure {
+            font-family: monospace;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Chem<span>AI</span></div>
+            <ul class="nav-links">
+                <li><a href="#despre">Despre</a></li>
+                <li><a href="#functionalitati">Funcționalități</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#preturi">Prețuri</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Învață Chimia cu Ajutorul Inteligenței Artificiale</h1>
+            <p>O aplicație revoluționară care se adaptează la nivelul tău de cunoștințe și te ajută să înțelegi chimia mai ușor și mai rapid.</p>
+            <a href="#demo" class="btn">Începe acum</a>
+        </div>
+    </section>
+
+    <section id="despre">
+        <h2 class="section-title">Despre ChemAI</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+            ChemAI este o aplicație de învățare personalizată la chimie, construită pe tehnologii de inteligență artificială. 
+            Sistemul analizează progresul elevului și se adaptează pentru a oferi explicații, exerciții și feedback perfect potrivite nevoilor individuale.
+        </p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Diagnostic Inteligent</h3>
+                <p>Testul inițial identifică punctele slabe și creează un plan de învățare personalizat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Explicații Personalizate</h3>
+                <p>Explicații adaptate la nivelul tău, de la începător la avansat, cu analogii și exemple concrete.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔬</div>
+                <h3>Simulări Vizuale</h3>
+                <p>Modele 3D ale moleculelor și animații ale reacțiilor chimice pentru o înțelegere mai profundă.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="functionalitati">
+        <h2 class="section-title">Funcționalități Cheie</h2>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>Test Inițial + Diagnostic</h3>
+                <p>La început, elevul completează un test scurt. AI-ul identifică punctele slabe și creează un plan de învățare personalizat.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Explicații Personalizate</h3>
+                <p>AI-ul adaptează explicațiile după nivelul elevului, de la analogii simple pentru începători până la mecanisme complexe pentru avansați.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Generare de Exerciții</h3>
+                <p>Sistemul creează exerciții personalizate bazate pe dificultățile identificate, cu nivel de dificultate progresiv.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Feedback Instant</h3>
+                <p>Nu doar indică răspunsul corect, ci explică unde s-a greșit și de ce, oferind metode de corectare.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Simulări Vizuale</h3>
+                <p>Modele 3D ale moleculelor, animații ale reacțiilor chimice și grafice pentru procese complexe.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Teste Adaptative</h3>
+                <p>Testele se ajustează automat în funcție de răspunsurile elevului, devenind mai dificile sau mai ușoare.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo">
+        <h2 class="section-title">Demo Interactiv</h2>
+        
+        <div class="demo">
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3>Exemplu: Diferența dintre Alcooli și Eteri</h3>
+                    <p>AI-ul explică diferențele între compuși cu structuri similare:</p>
+                    
+                    <div class="molecule">
+                        <h4>Etanol (Alcool)</h4>
+                        <div class="molecule-structure">CH₃-CH₂-OH</div>
+                        <p>Conține gruparea hidroxil (-OH) legată de un carbon saturat.</p>
+                    </div>
+                    
+                    <div class="molecule">
+                        <h4>Etoxietan (Eter)</h4>
+                        <div class="molecule-structure">CH₃-CH₂-O-CH₂-CH₃</div>
+                        <p>Conține un atom de oxigen legat de doi radicali de carbon.</p>
+                    </div>
+                    
+                    <p><strong>Explicația AI:</strong> "Diferența principală este gruparea funcțională. Alcoolii au gruparea -OH, iar eterii au un atom de oxigen legat de doi radicali de carbon."</p>
+                </div>
+                
+                <div class="demo-visual">
+                    <h4>Exercițiu Personalizat</h4>
+                    <p>Identifică compusul care este un alcool:</p>
+                    
+                    <div id="quiz">
+                        <div class="quiz-option" onclick="checkAnswer(this, 'A')">A) CH₃-O-CH₃</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 'B')">B) CH₃-CH₂-OH</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 'C')">C) CH₃-CH₂-O-CH₃</div>
+                    </div>
+                    
+                    <div id="feedback" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+            <h3 style="text-align: center; margin-bottom: 1rem;">Ce spun utilizatorii noștri</h3>
+            
+            <div class="testimonial">
+                <p>"ChemAI m-a ajutat să înțeleg reacțiile redox care mi se păreau foarte complicate. Explicațiile personalizate și exercițiile adaptate au făcut diferența!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student">
+                    <div>
+                        <strong>Maria Popescu</strong>
+                        <p>Elevă, clasa a XI-a</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"Ca profesor, aplicația îmi oferă o imagine clară asupra dificultăților elevilor și îmi permite să personalizez lecțiile. Modul profesor este extrem de util!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Profesor">
+                    <div>
+                        <strong>Ion Ionescu</strong>
+                        <p>Profesor de chimie</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preturi">
+        <h2 class="section-title">Alege Planul Potrivit</h2>
+        
+        <div class="pricing">
+            <div class="pricing-card">
+                <h3>Elev</h3>
+                <div class="price">29<span>lei/lună</span></div>
+                <ul class="pricing-features">
+                    <li>Acces la toate lecțiile</li>
+                    <li>Exerciții personalizate</li>
+                    <li>Feedback detaliat</li>
+                    <li>Simulări vizuale</li>
+                    <li>Suport prin chat</li>
+                </ul>
+                <a href="#" class="btn">Alege planul</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3>Profesor</h3>
+                <div class="price">49<span>lei/lună</span></div>
+                <ul class="pricing-features">
+                    <li>Toate funcțiile pentru elevi</li>
+                    <li>Modul profesor</li>
+                    <li>Analiza progresului clasei</li>
+                    <li>Generare de teme</li>
+                    <li>Suport prioritrar</li>
+                </ul>
+                <a href="#" class="btn">Alege planul</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Școală</h3>
+                <div class="price">Contactează-ne</div>
+                <ul class="pricing-features">
+                    <li>Licențe pentru toți elevii</li>
+                    <li>Panou de administrare</li>
+                    <li>Rapoarte detaliate</li>
+                    <li>Integrare cu platforma școlii</li>
+                    <li>Asistență dedicată</li>
+                </ul>
+                <a href="#contact" class="btn">Contact</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ChemAI</h3>
+                <p>Platforma inteligentă pentru învățarea personalizată a chimiei.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Linkuri rapide</h3>
+                <ul>
+                    <li><a href="#despre">Despre noi</a></li>
+                    <li><a href="#functionalitati">Funcționalități</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#preturi">Prețuri</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: contact@chemai.ro</li>
+                    <li>Telefon: +40 721 123 456</li>
+                    <li>Adresă: Str. Științei, nr. 10, București</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Înscrie-te la newsletter</h3>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Email-ul tău" style="padding: 0.5rem; width: 100%; margin-bottom: 0.5rem; border-radius: 5px; border: none;">
+                    <button type="submit" class="btn" style="width: 100%;">Abonează-te</button>
+                </form>
+            </div>
+        </div>
+        
+        
+    </footer>
+
+    <script>
+        // Funcție pentru demo-ul interactiv
+        function checkAnswer(element, selected) {
+            const correctAnswer = 'B';
+            const feedback = document.getElementById('feedback');
+            
+            // Resetăm toate opțiunile
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.style.backgroundColor = '';
+            });
+            
+            if (selected === correctAnswer) {
+                element.style.backgroundColor = 'var(--success)';
+                element.style.color = 'white';
+                feedback.innerHTML = '<p style="color: var(--success);">✓ Corect! CH₃-CH₂-OH este etanol, un alcool, deoarece conține gruparea hidroxil (-OH) legată de un carbon saturat.</p>';
+            } else {
+                element.style.backgroundColor = 'var(--danger)';
+                element.style.color = 'white';
+                feedback.innerHTML = '<p style="color: var(--danger);">✗ Incorect. CH₃-CH₂-OH (etanol) este alcool. Opțiunile A și C sunt eteri deoarece au atomul de oxigen legat de doi radicali de carbon.</p>';
+            }
+            
+            feedback.style.display = 'block';
+        }
+        
+        // Formular newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mulțumim pentru abonare! Vei primi noutățile despre ChemAI în scurt timp.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
