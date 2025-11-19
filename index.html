@@ -1262,68 +1262,7 @@
             }
         });
 
-        <script>
-const messagesDiv = document.getElementById("chat-messages");
-const input = document.getElementById("chat-input");
-const sendBtn = document.getElementById("chat-send");
-
-function addMessage(text, sender) {
-    const div = document.createElement("div");
-    div.classList.add("message", sender);
-    div.textContent = text;
-    messagesDiv.appendChild(div);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-async function sendMessage() {
-    const text = input.value.trim();
-    if (!text) return;
-
-    addMessage(text, "user");
-    input.value = "";
-
-    addMessage("Se procesează...", "bot");
-
-    const response = await fetch("http://localhost:3000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text })
-    });
-
-    const data = await response.json();
-
-    // înlocuiește ultimul mesaj "Se procesează..."
-    messagesDiv.lastChild.textContent = data.reply;
-}
-
-sendBtn.onclick = sendMessage;
-
-input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-});
-
-<div id="chatbot">
-    <div id="chat-header">Asistent ChemAI</div>
-    <div id="chat-messages"></div>
-
-    <div id="chat-input-area">
-        <input type="text" id="chat-input" placeholder="Scrie o întrebare de chimie...">
-        <button id="chat-send">Trimite</button>
-    </div>
-</div>
-async function askChemAI(question) {
-    const response = await fetch("https://chem-ai.onrender.com/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: question })
-    });
-
-    const data = await response.json();
-    return data.reply;
-}
-<script src="chat.js"></script>
-    
-</script>
+        
 
     
 
@@ -1333,4 +1272,3 @@ async function askChemAI(question) {
        
 </body>
 </html>
-
