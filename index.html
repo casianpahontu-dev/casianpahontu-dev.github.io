@@ -16,8 +16,11 @@
             --warning: #ffc107;
             --danger: #dc3545;
             --gradient: linear-gradient(135deg, #4a6fa5, #166088);
+            --gradient-accent: linear-gradient(135deg, #4cb5ae, #3a9a94);
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --radius: 12px;
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.15);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         * {
@@ -30,18 +33,26 @@
         body {
             background-color: var(--light);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
         
+        /* Header Styles */
         header {
-            background: var(--gradient);
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--dark);
             padding: 1rem 0;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         nav {
@@ -54,34 +65,53 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 800;
             display: flex;
             align-items: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .logo span {
             color: var(--accent);
+            -webkit-text-fill-color: var(--accent);
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
+            gap: 2rem;
         }
         
         .nav-links a {
-            color: white;
+            color: var(--dark);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
         }
         
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
         
         .auth-buttons {
@@ -91,112 +121,246 @@
         
         .auth-btn {
             background: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 0.5rem 1.2rem;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: var(--transition);
         }
         
         .auth-btn:hover {
-            background: white;
-            color: var(--primary);
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
         }
         
         .auth-btn.signup {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--gradient);
+            color: white;
+            border: none;
         }
         
         .auth-btn.signup:hover {
-            background: #3a9a94;
-            border-color: #3a9a94;
+            background: var(--gradient-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 181, 174, 0.4);
         }
         
         .user-info {
             display: flex;
             align-items: center;
             gap: 1rem;
-            color: white;
+            color: var(--dark);
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-        }
-        
-        .hero {
-            background: 
-                linear-gradient(rgba(74, 111, 165, 0.85), rgba(22, 96, 136, 0.9)),
-                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
             color: white;
-            padding: 8rem 2rem;
-            text-align: center;
-            position: relative;
-            width: 100%;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn:hover {
-            background-color: #3a9a94;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-        }
-        
-        .btn-large {
-            padding: 1.2rem 2.5rem;
             font-size: 1.2rem;
         }
         
+        /* Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 450px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: modalFade 0.3s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: var(--transition);
+            background: none;
+            border: none;
+        }
+        
+        .close-modal:hover {
+            color: var(--dark);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 181, 174, 0.1);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .form-footer a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .modal-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+        
+        .modal-btn:hover {
+            background: var(--gradient-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 181, 174, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: 
+                linear-gradient(rgba(74, 111, 165, 0.9), rgba(22, 96, 136, 0.95)),
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 10rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(76, 181, 174, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(76, 181, 174, 0.4);
+        }
+        
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Sections */
         section {
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -205,32 +369,49 @@
             text-align: center;
             margin-bottom: 4rem;
             color: var(--secondary);
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
         
         .section-subtitle {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.3rem;
             color: #666;
+            line-height: 1.8;
         }
         
+        /* Features */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
         
         .feature-card {
             background-color: white;
             border-radius: var(--radius);
-            padding: 2.5rem 2rem;
+            padding: 3rem 2.5rem;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: var(--transition);
             text-align: center;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .feature-card::before {
@@ -245,31 +426,43 @@
         
         .feature-card:hover {
             transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
         }
         
         .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .feature-card h3 {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             color: var(--secondary);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
         
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* Demo Section */
         .demo {
-            background-color: #f0f5ff;
+            background-color: #f8fbff;
             border-radius: var(--radius);
-            padding: 3rem;
+            padding: 4rem;
             margin-top: 2rem;
+            border: 1px solid rgba(74, 111, 165, 0.1);
         }
         
         .demo-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
         
@@ -283,91 +476,107 @@
             min-width: 300px;
             background-color: white;
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
         .molecule {
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
         
         .molecule-structure {
             font-family: monospace;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin: 1.5rem 0;
             padding: 1.5rem;
             background-color: #f8f9fa;
             border-radius: var(--radius);
             border-left: 4px solid var(--accent);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
         }
         
         .quiz-option {
-            padding: 1rem;
-            margin: 0.8rem 0;
+            padding: 1.2rem;
+            margin: 1rem 0;
             background: #f8f9fa;
             border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-weight: 500;
         }
         
         .quiz-option:hover {
             background: #e9ecef;
+            border-color: var(--accent);
         }
         
+        /* Testimonials */
         .testimonial {
             background-color: white;
             border-radius: var(--radius);
-            padding: 2.5rem;
+            padding: 3rem;
             margin: 1.5rem 0;
             box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+            transition: var(--transition);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         .testimonial-author {
             display: flex;
             align-items: center;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
         
         .testimonial-author img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             margin-right: 1.5rem;
             object-fit: cover;
+            border: 3px solid var(--accent);
         }
         
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
         
+        /* Test Section */
         .test-section {
             background: 
-                linear-gradient(rgba(74, 111, 165, 0.9), rgba(22, 96, 136, 0.9)),
-                url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                linear-gradient(rgba(74, 111, 165, 0.9), rgba(22, 96, 136, 0.95)),
+                url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
             border-radius: var(--radius);
-            margin: 3rem 0;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-lg);
         }
         
         .test-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
         }
         
         .test-section p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 700px;
-            margin: 0 auto 2.5rem;
+            margin: 0 auto 3rem;
             opacity: 0.95;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            line-height: 1.7;
         }
         
         /* Chatbot Styles */
@@ -379,42 +588,51 @@
         }
         
         .chatbot-toggle {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 25px rgba(74, 111, 165, 0.4); }
+            50% { box-shadow: 0 10px 30px rgba(74, 111, 165, 0.7); }
+            100% { box-shadow: 0 10px 25px rgba(74, 111, 165, 0.4); }
         }
         
         .chatbot-toggle:hover {
             transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         
         .chatbot-window {
             position: absolute;
-            bottom: 80px;
+            bottom: 90px;
             right: 0;
-            width: 350px;
-            height: 500px;
+            width: 380px;
+            height: 550px;
             background: white;
             border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-lg);
             display: none;
             flex-direction: column;
             overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
         }
         
         .chatbot-header {
             background: var(--gradient);
             color: white;
-            padding: 1rem;
+            padding: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -423,197 +641,149 @@
         .chatbot-title {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-weight: bold;
+            gap: 0.8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
         
         .chatbot-close {
             background: none;
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .chatbot-close:hover {
+            transform: rotate(90deg);
         }
         
         .chatbot-messages {
             flex: 1;
-            padding: 1rem;
+            padding: 1.5rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.2rem;
+            background: #f8fbff;
         }
         
         .message {
-            max-width: 80%;
-            padding: 0.8rem 1rem;
+            max-width: 85%;
+            padding: 1rem 1.2rem;
             border-radius: 18px;
-            line-height: 1.4;
+            line-height: 1.5;
+            animation: messageAppear 0.3s ease-out;
+        }
+        
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .user-message {
             align-self: flex-end;
-            background: var(--accent);
+            background: var(--gradient);
             color: white;
             border-bottom-right-radius: 5px;
         }
         
         .bot-message {
             align-self: flex-start;
-            background: #f0f5ff;
+            background: white;
             color: var(--dark);
             border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         
         .chatbot-input {
             display: flex;
-            padding: 1rem;
+            padding: 1.2rem;
             border-top: 1px solid #eee;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            background: white;
         }
         
         .chatbot-input input {
             flex: 1;
-            padding: 0.8rem;
+            padding: 1rem 1.2rem;
             border: 1px solid #ddd;
-            border-radius: 20px;
+            border-radius: 25px;
             outline: none;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(76, 181, 174, 0.2);
         }
         
         .chatbot-input button {
-            background: var(--accent);
+            background: var(--gradient);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .chatbot-input button:hover {
+            background: var(--gradient-accent);
+            transform: scale(1.05);
         }
         
         .quick-questions {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
         }
         
         .quick-question {
-            background: #e9ecef;
+            background: rgba(74, 111, 165, 0.1);
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .quick-question:hover {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .auth-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: var(--radius);
-            width: 90%;
-            max-width: 450px;
-            padding: 2.5rem;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-            position: relative;
-            animation: modalFade 0.3s;
-        }
-        
-        @keyframes modalFade {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-        }
-        
-        .close-modal:hover {
-            color: var(--dark);
-        }
-        
-        .modal-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            color: var(--primary);
             font-weight: 500;
         }
         
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-        
-        .form-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        
-        .form-footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        
-        footer {
-            background-color: var(--dark);
+        .quick-question:hover {
+            background: var(--primary);
             color: white;
-            padding: 4rem 2rem 2rem;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 5rem 2rem 2rem;
         }
         
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
         }
         
         .footer-section h3 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
         .footer-section ul {
@@ -621,107 +791,62 @@
         }
         
         .footer-section ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
         
         .footer-section a {
             color: #ddd;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .footer-section a:hover {
             color: var(--accent);
+            transform: translateX(5px);
         }
         
         .social-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
         }
         
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
             background: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
-#chatbot {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 320px;
-    background: white;
-    border-radius: 8px;
-    border: 2px solid #2d56ff;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
-}
-
-#chat-header {
-    background: #2d56ff;
-    color: white;
-    padding: 10px;
-    font-size: 18px;
-    text-align: center;
-}
-
-#chat-messages {
-    height: 360px;
-    overflow-y: auto;
-    padding: 10px;
-    background: #eef3ff;
-}
-
-.message {
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 6px;
-}
-
-.user {
-    background: #d5e4ff;
-    text-align: right;
-}
-
-.bot {
-    background: #e1f4d7;
-}
-
-#chat-input-area {
-    display: flex;
-    border-top: 1px solid #ccc;
-}
-
-#chat-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-}
-
-#chat-send {
-    background: #2d56ff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
         
         .copyright {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid #444;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -729,32 +854,67 @@
                 display: none;
             }
             
+            .hero {
+                padding: 7rem 2rem;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
             
             .demo-container {
                 flex-direction: column;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .features {
+                grid-template-columns: 1fr;
             }
             
-            .hero {
-                padding: 6rem 2rem;
-                min-height: 70vh;
+            .testimonial-grid {
+                grid-template-columns: 1fr;
             }
             
             .chatbot-window {
-                width: 300px;
-                height: 450px;
+                width: 320px;
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-large {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .chatbot-window {
+                width: 280px;
+                right: -20px;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="mainHeader">
         <nav>
             <div class="logo">Chem<span>AI</span></div>
             <ul class="nav-links">
@@ -782,14 +942,17 @@
         <div class="hero-content">
             <h1>Învață Chimia cu Ajutorul Inteligenței Artificiale</h1>
             <p>Platforma perfectă pentru elevi care vor să înțeleagă chimia mai ușor și mai rapid.</p>
-            <button class="btn btn-large" id="heroSignupBtn">Înregistrează-te acum gratuit</button>
+            <button class="btn btn-large" id="heroSignupBtn">
+                <i class="fas fa-rocket"></i>
+                Înregistrează-te acum gratuit
+            </button>
         </div>
     </section>
 
     <section id="despre">
         <h2 class="section-title">Despre ChemAI</h2>
         <p class="section-subtitle">
-            ChemAI este o aplicație de învățare personalizată la chimie, construită pe tehnologii de inteligență artificiale. 
+            ChemAI este o aplicație de învățare personalizată la chimie, construită pe tehnologii de inteligență artificială. 
             Sistemul analizează progresul tău și se adaptează pentru a-ți oferi explicații, exerciții și feedback perfect potrivite nevoilor tale.
         </p>
         
@@ -927,41 +1090,20 @@
         <div class="test-section">
             <h2>Ești gata să-ți testezi cunoștințele?</h2>
             <p>Completează testul nostru inițial gratuit pentru a-ți evalua nivelul actual și pentru a primi un plan de învățare personalizat.</p>
-            <button class="btn btn-large" id="startTestBtn">Începe Testul Inițial</button>
+            <button class="btn btn-large" id="startTestBtn">
+                <i class="fas fa-play-circle"></i>
+                Începe Testul Inițial
+            </button>
         </div>
     </section>
 
     <footer id="contact">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>ChemAI</h3>
-                <p>Platforma inteligentă pentru învățarea personalizată a chimiei.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
             
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-envelope"></i> Email: contact@chemai.ro</li>
-                    <li><i class="fas fa-phone"></i> Telefon: +40 721 123 456</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Adresă: Str. Științei, nr. 10, București</li>
-                </ul>
-            </div>
             
-            <div class="footer-section">
-                <h3>Resurse</h3>
-                <ul>
-                    <li><a href="#">Blog educațional</a></li>
-                    <li><a href="#">Ghiduri de studiu</a></li>
-                    <li><a href="#">Întrebări frecvente</a></li>
-                    <li><a href="#">Politica de confidențialitate</a></li>
-                </ul>
-            </div>
+            
+            
+            
             
             <div class="footer-section">
                 <h3>Înscrie-te la newsletter</h3>
@@ -969,14 +1111,15 @@
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Email-ul tău" required>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Abonează-te</button>
+                    <button type="submit" class="modal-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Abonează-te
+                    </button>
                 </form>
             </div>
         </div>
         
-        <div class="copyright">
-            <p>&copy; 2023 ChemAI. Toate drepturile rezervate.</p>
-        </div>
+        
     </footer>
 
     <!-- Chatbot Container -->
@@ -1017,18 +1160,21 @@
     <!-- Modal pentru autentificare -->
     <div class="auth-modal" id="loginModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeLoginModal">&times;</span>
+            <button class="close-modal" id="closeLoginModal">&times;</button>
             <h2 class="modal-title">Autentificare</h2>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" class="form-control" required>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Introdu adresa de email" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Parolă</label>
-                    <input type="password" id="loginPassword" class="form-control" required>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Introdu parola" required>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Autentificare</button>
+                <button type="submit" class="modal-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Autentificare
+                </button>
                 <div class="form-footer">
                     <p>Nu ai cont? <a href="#" id="showSignupFromLogin">Înregistrează-te</a></p>
                 </div>
@@ -1039,20 +1185,20 @@
     <!-- Modal pentru înregistrare -->
     <div class="auth-modal" id="signupModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeSignupModal">&times;</span>
+            <button class="close-modal" id="closeSignupModal">&times;</button>
             <h2 class="modal-title">Înregistrare</h2>
             <form id="signupForm">
                 <div class="form-group">
                     <label for="signupName">Nume complet</label>
-                    <input type="text" id="signupName" class="form-control" required>
+                    <input type="text" id="signupName" class="form-control" placeholder="Introdu numele tău complet" required>
                 </div>
                 <div class="form-group">
                     <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" class="form-control" required>
+                    <input type="email" id="signupEmail" class="form-control" placeholder="Introdu adresa de email" required>
                 </div>
                 <div class="form-group">
                     <label for="signupPassword">Parolă</label>
-                    <input type="password" id="signupPassword" class="form-control" required>
+                    <input type="password" id="signupPassword" class="form-control" placeholder="Creează o parolă" required>
                 </div>
                 <div class="form-group">
                     <label for="signupClass">Clasă</label>
@@ -1064,7 +1210,10 @@
                         <option value="12">Clasa a XII-a</option>
                     </select>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Înregistrare</button>
+                <button type="submit" class="modal-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Înregistrare
+                </button>
                 <div class="form-footer">
                     <p>Ai deja cont? <a href="#" id="showLoginFromSignup">Autentifică-te</a></p>
                 </div>
@@ -1092,6 +1241,7 @@
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
         const newsletterForm = document.getElementById('newsletter-form');
+        const mainHeader = document.getElementById('mainHeader');
 
         // Elemente Chatbot
         const chatbotToggle = document.getElementById('chatbotToggle');
@@ -1101,6 +1251,15 @@
         const chatbotInput = document.getElementById('chatbotInput');
         const chatbotSend = document.getElementById('chatbotSend');
         const quickQuestions = document.querySelectorAll('.quick-question');
+
+        // Scroll effect for header
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
 
         // Verifică dacă utilizatorul este autentificat la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
@@ -1141,10 +1300,12 @@
         // Evenimente pentru închiderea modalelor
         closeLoginModal.addEventListener('click', function() {
             loginModal.style.display = 'none';
+            loginForm.reset();
         });
 
         closeSignupModal.addEventListener('click', function() {
             signupModal.style.display = 'none';
+            signupForm.reset();
         });
 
         // Evenimente pentru comutarea între modale
@@ -1152,18 +1313,21 @@
             e.preventDefault();
             loginModal.style.display = 'none';
             signupModal.style.display = 'flex';
+            loginForm.reset();
         });
 
         showLoginFromSignup.addEventListener('click', function(e) {
             e.preventDefault();
             signupModal.style.display = 'none';
             loginModal.style.display = 'flex';
+            signupForm.reset();
         });
 
         // Eveniment pentru deconectare
         logoutBtn.addEventListener('click', function() {
             localStorage.removeItem('chemAIUser');
             hideUserInfo();
+            alert('Te-ai deconectat cu succes!');
         });
 
         // Eveniment pentru formularul de autentificare
@@ -1172,16 +1336,19 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Simulare autentificare (în producție, ar fi o cerere către server)
-            const user = {
-                name: 'Utilizator Demo',
-                email: email
-            };
+            // Verificare simplă (în producție, ar fi o cerere către server)
+            const users = JSON.parse(localStorage.getItem('chemAIUsers')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
             
-            localStorage.setItem('chemAIUser', JSON.stringify(user));
-            showUserInfo(user);
-            loginModal.style.display = 'none';
-            loginForm.reset();
+            if (user) {
+                localStorage.setItem('chemAIUser', JSON.stringify(user));
+                showUserInfo(user);
+                loginModal.style.display = 'none';
+                loginForm.reset();
+                alert('Autentificare reușită! Bine ai revenit, ' + user.name + '!');
+            } else {
+                alert('Email sau parolă incorectă! Încearcă din nou sau înregistrează-te.');
+            }
         });
 
         // Eveniment pentru formularul de înregistrare
@@ -1192,28 +1359,45 @@
             const password = document.getElementById('signupPassword').value;
             const userClass = document.getElementById('signupClass').value;
             
-            // Simulare înregistrare (în producție, ar fi o cerere către server)
-            const user = {
+            // Verificare dacă email-ul există deja
+            const users = JSON.parse(localStorage.getItem('chemAIUsers')) || [];
+            const existingUser = users.find(u => u.email === email);
+            
+            if (existingUser) {
+                alert('Acest email este deja înregistrat! Te rugăm să te autentifici.');
+                return;
+            }
+            
+            // Creare utilizator nou
+            const newUser = {
+                id: Date.now(),
                 name: name,
                 email: email,
-                class: userClass
+                password: password,
+                class: userClass,
+                joinDate: new Date().toISOString()
             };
             
-            localStorage.setItem('chemAIUser', JSON.stringify(user));
-            showUserInfo(user);
+            // Salvare în localStorage
+            users.push(newUser);
+            localStorage.setItem('chemAIUsers', JSON.stringify(users));
+            localStorage.setItem('chemAIUser', JSON.stringify(newUser));
+            
+            showUserInfo(newUser);
             signupModal.style.display = 'none';
             signupForm.reset();
+            alert('Înregistrare reușită! Bine ai venit, ' + name + '!');
         });
 
         // Eveniment pentru butonul de start test
         startTestBtn.addEventListener('click', function() {
             const user = JSON.parse(localStorage.getItem('chemAIUser'));
             if (user) {
-                alert('Testul inițial va începe acum! Această funcționalitate va fi implementată în versiunea completă a aplicației.');
+                alert('Testul inițial va începe în curând! Această funcționalitate va fi implementată complet în versiunea finală.');
                 // Aici s-ar deschide testul efectiv
             } else {
                 alert('Trebuie să fii autentificat pentru a accesa testul inițial.');
-                signupModal.style.display = 'flex';
+                loginModal.style.display = 'flex';
             }
         });
 
@@ -1227,17 +1411,20 @@
                 opt.style.backgroundColor = '';
                 opt.style.color = '';
                 opt.style.fontWeight = '';
+                opt.style.borderColor = '';
             });
             
             if (selected === correctAnswer) {
                 element.style.backgroundColor = 'var(--success)';
                 element.style.color = 'white';
                 element.style.fontWeight = 'bold';
+                element.style.borderColor = 'var(--success)';
                 feedback.innerHTML = '<p style="color: var(--success);"><i class="fas fa-check-circle"></i> Corect! CH₃-CH₂-OH este etanol, un alcool, deoarece conține gruparea hidroxil (-OH) legată de un carbon saturat.</p>';
             } else {
                 element.style.backgroundColor = 'var(--danger)';
                 element.style.color = 'white';
                 element.style.fontWeight = 'bold';
+                element.style.borderColor = 'var(--danger)';
                 feedback.innerHTML = '<p style="color: var(--danger);"><i class="fas fa-times-circle"></i> Incorect. CH₃-CH₂-OH (etanol) este alcool. Opțiunile A și C sunt eteri deoarece au atomul de oxigen legat de doi radicali de carbon.</p>';
             }
             
@@ -1256,19 +1443,87 @@
         window.addEventListener('click', function(e) {
             if (e.target === loginModal) {
                 loginModal.style.display = 'none';
+                loginForm.reset();
             }
             if (e.target === signupModal) {
                 signupModal.style.display = 'none';
+                signupForm.reset();
             }
         });
 
-        
+        // Chatbot Functionality
+        chatbotToggle.addEventListener('click', function() {
+            chatbotWindow.style.display = 'flex';
+        });
 
-    
+        chatbotClose.addEventListener('click', function() {
+            chatbotWindow.style.display = 'none';
+        });
 
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
- 
+        // Adăugare evenimente pentru întrebări rapide
+        quickQuestions.forEach(button => {
+            button.addEventListener('click', function() {
+                const question = this.getAttribute('data-question');
+                chatbotInput.value = question;
+                sendMessage();
+            });
+        });
 
-       
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
+            // Adăugare mesaj utilizator
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+
+            // Simulare răspuns AI
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = text;
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function getBotResponse(question) {
+            const lowerQuestion = question.toLowerCase();
+            
+            // Baza de cunoștințe pentru chimia de liceu
+            if (lowerQuestion.includes('atom') || lowerQuestion.includes('ce este un atom')) {
+                return "Un atom este cea mai mică particulă a unui element chimic care păstrează proprietățile chimice ale acelui element. Atomii sunt formați dintr-un nucleu (protoni și neutroni) și electroni care se rotesc în jurul nucleului.";
+            } else if (lowerQuestion.includes('echilibrează') || lowerQuestion.includes('ecuații chimice')) {
+                return "Pentru a echilibra o ecuație chimică, urmezi aceste etape:\n1. Scrie reactanții și produșii\n2. Numără atomii fiecărui element pe ambele părți\n3. Adaugă coeficienți în fața formulelor pentru a egaliza numărul de atomi\n4. Verifică dacă toți atomii sunt echilibrați\nExemplu: 2H₂ + O₂ → 2H₂O";
+            } else if (lowerQuestion.includes('acid') || lowerQuestion.includes('bază')) {
+                return "Diferențe principale între acizi și baze:\n• Acizii au pH < 7, bazele au pH > 7\n• Acizii eliberează ioni H⁺ în soluție\n• Bazele eliberează ioni OH⁻ în soluție\n• Acizii au gust acru, bazele au gust amar\n• Exemple: HCl (acid), NaOH (bază)";
+            } else if (lowerQuestion.includes('redox')) {
+                return "Reacțiile redox sunt reacții chimice în care are loc transfer de electroni între speciile chimice. Include două procese:\n• Oxidare: pierdere de electroni\n• Reducere: câștig de electroni\nExemplu: Zn + Cu²⁺ → Zn²⁺ + Cu (Zn se oxidează, Cu²⁺ se reduce)";
+            } else if (lowerQuestion.includes('mol') || lowerQuestion.includes('molă')) {
+                return "Mola este unitatea de măsură pentru cantitatea de substanță. O molă conține 6.022 × 10²³ particule (numărul lui Avogadro).\nFormula: n = m/M, unde:\nn = număr de moli\nm = masa substanței (g)\nM = masa molară (g/mol)";
+            } else if (lowerQuestion.includes('tabelul periodic')) {
+                return "Tabelul periodic aranjează elementele chimice în funcție de:\n• Numărul atomic (numărul de protoni)\n• Configurația electronică\n• Proprietăți chimice similare\nElementele sunt grupate în:\n• Metale, nemetale, semimetale\n• Grupe (coloane) și perioade (rânduri)";
+            } else if (lowerQuestion.includes('legătură chimică') || lowerQuestion.includes('legături')) {
+                return "Tipuri principale de legături chimice:\n1. Legături ionice - transfer de electroni (între metale și nemetale)\n2. Legături covalente - împărțirea electronilor (între nemetale)\n3. Legături metalice - în rețelele metalice\n4. Legături de hidrogen - între moleculele polare";
+            } else if (lowerQuestion.includes('salut') || lowerQuestion.includes('bună')) {
+                return "Salut! Sunt asistentul tău virtual pentru chimie. Poți să mă întrebi despre:\n• Atomii și structura atomică\n• Tabelul periodic\n• Legături chimice\n• Ecuații chimice\n• Reacții chimice\n• Soluții și concentrații\n• Chimie organică\nCu ce te pot ajuta?";
+            } else {
+                return "Întrebare interesantă! Din păcate, baza mea de cunoștințe este limitată la chimia de liceu. Poți încerca să reformulezi întrebarea sau să alegi una dintre întrebările rapide de mai sus. Dacă ai nevoie de ajutor cu un anumit concept chimic, sunt aici să te ajut!";
+            }
+        }
+    </script>
 </body>
 </html>
