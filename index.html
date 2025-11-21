@@ -579,6 +579,213 @@
             line-height: 1.7;
         }
         
+        /* Progress Dashboard */
+        .dashboard {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .progress-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .progress-card {
+            background: #f8fbff;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(74, 111, 165, 0.1);
+        }
+        
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .progress-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .recommendations {
+            background: #f8fbff;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .recommendations h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .recommendations ul {
+            list-style-type: none;
+        }
+        
+        .recommendations li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .recommendations li:last-child {
+            border-bottom: none;
+        }
+        
+        .recommendations i {
+            color: var(--accent);
+        }
+        
+        /* Exercise Generator */
+        .exercise-generator {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .generator-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .generated-exercise {
+            background: #f8fbff;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(74, 111, 165, 0.1);
+        }
+        
+        .exercise-question {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .exercise-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .exercise-option {
+            padding: 1.2rem;
+            background: white;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .exercise-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .exercise-feedback {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        .exercise-feedback.correct {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: var(--success);
+        }
+        
+        .exercise-feedback.incorrect {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: var(--danger);
+        }
+        
+        /* Enhanced Test Section */
+        .enhanced-test {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .test-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        
+        .test-stats {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .test-stat {
+            text-align: center;
+        }
+        
+        .test-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .test-stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .test-navigation {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+        
         /* Chatbot Styles */
         .chatbot-container {
             position: fixed;
@@ -886,6 +1093,19 @@
                 width: 320px;
                 height: 500px;
             }
+            
+            .progress-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .generator-controls {
+                flex-direction: column;
+            }
+            
+            .test-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 480px) {
@@ -910,6 +1130,10 @@
             .modal-content {
                 padding: 2rem 1.5rem;
             }
+            
+            .dashboard, .exercise-generator, .enhanced-test {
+                padding: 2rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -920,7 +1144,8 @@
             <ul class="nav-links">
                 <li><a href="#despre">Despre</a></li>
                 <li><a href="#functionalitati">Funcționalități</a></li>
-                <li><a href="#demo">Demo</a></li>
+                <li><a href="#progres">Progres</a></li>
+                <li><a href="#exercitii">Exerciții</a></li>
                 <li><a href="#testimoniale">Păreri</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1006,6 +1231,128 @@
         </div>
     </section>
 
+    <!-- Secțiunea nouă pentru Progres -->
+    <section id="progres">
+        <h2 class="section-title">Progresul Tău</h2>
+        <p class="section-subtitle">Urmărește-ți evoluția în învățarea chimiei și primește recomandări personalizate</p>
+        
+        <div class="dashboard">
+            <div class="progress-container">
+                <div class="progress-card">
+                    <div class="progress-title">Nivel Curent</div>
+                    <div class="progress-value" id="currentLevel">Începător</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="levelProgress" style="width: 30%"></div>
+                    </div>
+                    <div>Progres către nivelul intermediar: 30%</div>
+                </div>
+                
+                <div class="progress-card">
+                    <div class="progress-title">Exerciții Finalizate</div>
+                    <div class="progress-value" id="exercisesCompleted">12/50</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="exercisesProgress" style="width: 24%"></div>
+                    </div>
+                    <div>24% din exercițiile recomandate</div>
+                </div>
+                
+                <div class="progress-card">
+                    <div class="progress-title">Scor Mediu</div>
+                    <div class="progress-value" id="averageScore">76%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="scoreProgress" style="width: 76%"></div>
+                    </div>
+                    <div>Performanță: Bună</div>
+                </div>
+                
+                <div class="progress-card">
+                    <div class="progress-title">Zile Consecutive</div>
+                    <div class="progress-value" id="streakDays">5</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="streakProgress" style="width: 50%"></div>
+                    </div>
+                    <div>Menține-ți ritmul!</div>
+                </div>
+            </div>
+            
+            <div class="recommendations">
+                <h3><i class="fas fa-lightbulb"></i> Recomandări Personalizate</h3>
+                <ul id="recommendationsList">
+                    <li><i class="fas fa-check-circle"></i> Exersează echilibrarea ecuațiilor chimice - ai răspuns corect doar la 40% din întrebări</li>
+                    <li><i class="fas fa-check-circle"></i> Revizuiește tabelul periodic - ai uitat simbolurile elementelor din grupa 2</li>
+                    <li><i class="fas fa-check-circle"></i> Încearcă simulările de reacții redox - te vor ajuta să înțelegi mai bine transferul de electroni</li>
+                    <li><i class="fas fa-check-circle"></i> Completează testul de evaluare din capitolul "Acizi și Baze" pentru a-ți consolida cunoștințele</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiunea nouă pentru Generator de Exerciții -->
+    <section id="exercitii">
+        <h2 class="section-title">Generator de Exerciții</h2>
+        <p class="section-subtitle">Generează exerciții personalizate bazate pe nivelul tău și ariile care necesită îmbunătățire</p>
+        
+        <div class="exercise-generator">
+            <div class="generator-controls">
+                <div class="control-group">
+                    <label for="topicSelect">Alege subiectul:</label>
+                    <select id="topicSelect" class="form-control">
+                        <option value="all">Toate subiectele</option>
+                        <option value="atomi">Atomi și Structura Atomică</option>
+                        <option value="tabel">Tabelul Periodic</option>
+                        <option value="legaturi">Legături Chimice</option>
+                        <option value="ecuatii">Ecuații Chimice</option>
+                        <option value="reactii">Reacții Chimice</option>
+                        <option value="acizi">Acizi și Baze</option>
+                        <option value="redox">Reacții Redox</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="difficultySelect">Nivel de dificultate:</label>
+                    <select id="difficultySelect" class="form-control">
+                        <option value="beginner">Începător</option>
+                        <option value="intermediate" selected>Intermediar</option>
+                        <option value="advanced">Avansat</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="exerciseType">Tip de exercițiu:</label>
+                    <select id="exerciseType" class="form-control">
+                        <option value="multiple">Grila cu răspunsuri multiple</option>
+                        <option value="truefalse">Adevărat/Fals</option>
+                        <option value="matching">Potrivire</option>
+                        <option value="calculation">Calcul</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn" id="generateExerciseBtn">
+                <i class="fas fa-sync-alt"></i>
+                Generează Exercițiu Nou
+            </button>
+            
+            <div class="generated-exercise" id="generatedExercise" style="display: none;">
+                <div class="exercise-question" id="exerciseQuestion">Care dintre următoarele este un acid tare?</div>
+                
+                <div class="exercise-options" id="exerciseOptions">
+                    <div class="exercise-option" data-correct="false">NaOH</div>
+                    <div class="exercise-option" data-correct="true">HCl</div>
+                    <div class="exercise-option" data-correct="false">NH₃</div>
+                    <div class="exercise-option" data-correct="false">CH₃COOH</div>
+                </div>
+                
+                <button class="btn" id="checkAnswerBtn" style="background: var(--accent);">
+                    <i class="fas fa-check"></i>
+                    Verifică Răspunsul
+                </button>
+                
+                <div class="exercise-feedback" id="exerciseFeedback"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="demo">
         <h2 class="section-title">Demo Interactiv</h2>
         
@@ -1041,6 +1388,54 @@
                     </div>
                     
                     <div id="feedback" style="margin-top: 1.5rem; padding: 1.5rem; border-radius: var(--radius); display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiunea îmbunătățită pentru Test -->
+    <section id="test-initial">
+        <h2 class="section-title">Testul Inițial Îmbunătățit</h2>
+        <p class="section-subtitle">Completează testul nostru adaptiv pentru a-ți evalua nivelul și a primi un plan de învățare personalizat</p>
+        
+        <div class="enhanced-test">
+            <div class="test-progress">
+                <h3>Test de Evaluare Chimie</h3>
+                <div class="test-stats">
+                    <div class="test-stat">
+                        <div class="test-stat-value" id="currentQuestion">1/10</div>
+                        <div class="test-stat-label">Întrebare</div>
+                    </div>
+                    <div class="test-stat">
+                        <div class="test-stat-value" id="correctAnswers">0</div>
+                        <div class="test-stat-label">Corecte</div>
+                    </div>
+                    <div class="test-stat">
+                        <div class="test-stat-value" id="testScore">0%</div>
+                        <div class="test-stat-label">Scor</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="generated-exercise">
+                <div class="exercise-question" id="testQuestion">Care este numărul atomic al elementului Oxigen?</div>
+                
+                <div class="exercise-options" id="testOptions">
+                    <div class="exercise-option" data-correct="false">6</div>
+                    <div class="exercise-option" data-correct="false">7</div>
+                    <div class="exercise-option" data-correct="true">8</div>
+                    <div class="exercise-option" data-correct="false">16</div>
+                </div>
+                
+                <div class="test-navigation">
+                    <button class="auth-btn" id="prevQuestionBtn" disabled>
+                        <i class="fas fa-arrow-left"></i>
+                        Întrebarea Anterioară
+                    </button>
+                    <button class="btn" id="nextQuestionBtn">
+                        Următoarea Întrebare
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1086,24 +1481,37 @@
         </div>
     </section>
 
-    <section id="test-initial">
-        <div class="test-section">
-            <h2>Ești gata să-ți testezi cunoștințele?</h2>
-            <p>Completează testul nostru inițial gratuit pentru a-ți evalua nivelul actual și pentru a primi un plan de învățare personalizat.</p>
-            <button class="btn btn-large" id="startTestBtn">
-                <i class="fas fa-play-circle"></i>
-                Începe Testul Inițial
-            </button>
-        </div>
-    </section>
-
     <footer id="contact">
         <div class="footer-content">
+            <div class="footer-section">
+                <h3>ChemAI</h3>
+                <p>Platforma inteligentă de învățare a chimiei, adaptată nevoilor tale.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
             
+            <div class="footer-section">
+                <h3>Link-uri Rapide</h3>
+                <ul>
+                    <li><a href="#despre"><i class="fas fa-chevron-right"></i> Despre Noi</a></li>
+                    <li><a href="#functionalitati"><i class="fas fa-chevron-right"></i> Funcționalități</a></li>
+                    <li><a href="#progres"><i class="fas fa-chevron-right"></i> Progres</a></li>
+                    <li><a href="#exercitii"><i class="fas fa-chevron-right"></i> Exerciții</a></li>
+                </ul>
+            </div>
             
-            
-            
-            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:contact@chemai.ro"><i class="fas fa-envelope"></i> contact@chemai.ro</a></li>
+                    <li><a href="tel:+40712345678"><i class="fas fa-phone"></i> +40 712 345 678</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> București, România</a></li>
+                </ul>
+            </div>
             
             <div class="footer-section">
                 <h3>Înscrie-te la newsletter</h3>
@@ -1119,7 +1527,9 @@
             </div>
         </div>
         
-        
+        <div class="copyright">
+            <p>&copy; 2023 ChemAI. Toate drepturile rezervate.</p>
+        </div>
     </footer>
 
     <!-- Chatbot Container -->
@@ -1252,6 +1662,106 @@
         const chatbotSend = document.getElementById('chatbotSend');
         const quickQuestions = document.querySelectorAll('.quick-question');
 
+        // Elemente pentru noile funcționalități
+        const generateExerciseBtn = document.getElementById('generateExerciseBtn');
+        const generatedExercise = document.getElementById('generatedExercise');
+        const exerciseQuestion = document.getElementById('exerciseQuestion');
+        const exerciseOptions = document.getElementById('exerciseOptions');
+        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+        const exerciseFeedback = document.getElementById('exerciseFeedback');
+        const topicSelect = document.getElementById('topicSelect');
+        const difficultySelect = document.getElementById('difficultySelect');
+        const exerciseType = document.getElementById('exerciseType');
+        
+        // Elemente pentru testul îmbunătățit
+        const currentQuestion = document.getElementById('currentQuestion');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const testScore = document.getElementById('testScore');
+        const testQuestion = document.getElementById('testQuestion');
+        const testOptions = document.getElementById('testOptions');
+        const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+
+        // Baza de date pentru exerciții
+        const exerciseDatabase = {
+            atomi: [
+                {
+                    question: "Care este numărul atomic al elementului Oxigen?",
+                    options: ["6", "7", "8", "16"],
+                    correct: 2,
+                    explanation: "Numărul atomic al Oxigenului este 8, ceea ce înseamnă că are 8 protoni în nucleu."
+                },
+                {
+                    question: "Câți neutroni are atomul de Carbon-14?",
+                    options: ["6", "7", "8", "14"],
+                    correct: 2,
+                    explanation: "Carbon-14 are 6 protoni și 8 neutroni (14 - 6 = 8)."
+                }
+            ],
+            tabel: [
+                {
+                    question: "Care element are simbolul 'Au'?",
+                    options: ["Argint", "Aur", "Aluminiu", "Argon"],
+                    correct: 1,
+                    explanation: "'Au' este simbolul pentru Aur (din latină 'Aurum')."
+                },
+                {
+                    question: "În ce grupă se află gazele nobile?",
+                    options: ["Grupa 1", "Grupa 2", "Grupa 17", "Grupa 18"],
+                    correct: 3,
+                    explanation: "Gazele nobile se află în grupa 18 a tabelului periodic."
+                }
+            ],
+            legaturi: [
+                {
+                    question: "Care dintre următoarele este o legătură ionică?",
+                    options: ["H₂O", "NaCl", "CH₄", "O₂"],
+                    correct: 1,
+                    explanation: "NaCl (clorura de sodiu) este o legătură ionică între un metal (Na) și un nemetal (Cl)."
+                }
+            ],
+            ecuatii: [
+                {
+                    question: "Care este coeficientul corect pentru O₂ în ecuația echilibrată: CH₄ + O₂ → CO₂ + H₂O?",
+                    options: ["1", "2", "3", "4"],
+                    correct: 1,
+                    explanation: "Ecuația echilibrată este: CH₄ + 2O₂ → CO₂ + 2H₂O, deci coeficientul pentru O₂ este 2."
+                }
+            ],
+            reactii: [
+                {
+                    question: "Ce tip de reacție este: CaO + H₂O → Ca(OH)₂?",
+                    options: ["Reacție de combinare", "Reacție de descompunere", "Reacție de substituție", "Reacție de neutralizare"],
+                    correct: 0,
+                    explanation: "Aceasta este o reacție de combinare, unde două substanțe se unesc pentru a forma o singură substanță nouă."
+                }
+            ],
+            acizi: [
+                {
+                    question: "Care dintre următoarele este un acid tare?",
+                    options: ["NaOH", "HCl", "NH₃", "CH₃COOH"],
+                    correct: 1,
+                    explanation: "HCl (acidul clorhidric) este un acid tare care se disociază complet în apă."
+                }
+            ],
+            redox: [
+                {
+                    question: "În reacția Zn + Cu²⁺ → Zn²⁺ + Cu, care element se reduce?",
+                    options: ["Zn", "Cu", "Ambele", "Niciunul"],
+                    correct: 1,
+                    explanation: "Cu²⁺ se reduce la Cu, primind 2 electroni de la Zn care se oxidează."
+                }
+            ]
+        };
+
+        // Starea testului
+        let testState = {
+            currentQuestionIndex: 0,
+            userAnswers: [],
+            questions: [],
+            score: 0
+        };
+
         // Scroll effect for header
         window.addEventListener('scroll', function() {
             if (window.scrollY > 100) {
@@ -1266,7 +1776,11 @@
             const user = JSON.parse(localStorage.getItem('chemAIUser'));
             if (user) {
                 showUserInfo(user);
+                initializeUserProgress(user);
             }
+            
+            // Inițializează testul
+            initializeTest();
         });
 
         // Funcție pentru afișarea informațiilor utilizatorului
@@ -1275,6 +1789,47 @@
             userInfo.style.display = 'flex';
             userName.textContent = user.name;
             userAvatar.textContent = user.name.charAt(0).toUpperCase();
+        }
+
+        // Funcție pentru inițializarea progresului utilizatorului
+        function initializeUserProgress(user) {
+            // Încarcă progresul din localStorage sau creează unul nou
+            let userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            
+            if (!userProgress || userProgress.userId !== user.id) {
+                userProgress = {
+                    userId: user.id,
+                    level: "beginner",
+                    levelProgress: 30,
+                    exercisesCompleted: 12,
+                    totalExercises: 50,
+                    averageScore: 76,
+                    streakDays: 5,
+                    lastActivity: new Date().toISOString()
+                };
+                localStorage.setItem('chemAIUserProgress', JSON.stringify(userProgress));
+            }
+            
+            // Actualizează UI-ul cu datele de progres
+            updateProgressUI(userProgress);
+        }
+
+        // Funcție pentru actualizarea UI-ului cu progresul
+        function updateProgressUI(progress) {
+            document.getElementById('currentLevel').textContent = 
+                progress.level === 'beginner' ? 'Începător' : 
+                progress.level === 'intermediate' ? 'Intermediar' : 'Avansat';
+            
+            document.getElementById('levelProgress').style.width = `${progress.levelProgress}%`;
+            document.getElementById('exercisesCompleted').textContent = 
+                `${progress.exercisesCompleted}/${progress.totalExercises}`;
+            document.getElementById('exercisesProgress').style.width = 
+                `${(progress.exercisesCompleted / progress.totalExercises) * 100}%`;
+            document.getElementById('averageScore').textContent = `${progress.averageScore}%`;
+            document.getElementById('scoreProgress').style.width = `${progress.averageScore}%`;
+            document.getElementById('streakDays').textContent = progress.streakDays;
+            document.getElementById('streakProgress').style.width = 
+                `${Math.min(progress.streakDays * 10, 100)}%`;
         }
 
         // Funcție pentru ascunderea informațiilor utilizatorului
@@ -1343,6 +1898,7 @@
             if (user) {
                 localStorage.setItem('chemAIUser', JSON.stringify(user));
                 showUserInfo(user);
+                initializeUserProgress(user);
                 loginModal.style.display = 'none';
                 loginForm.reset();
                 alert('Autentificare reușită! Bine ai revenit, ' + user.name + '!');
@@ -1384,22 +1940,266 @@
             localStorage.setItem('chemAIUser', JSON.stringify(newUser));
             
             showUserInfo(newUser);
+            initializeUserProgress(newUser);
             signupModal.style.display = 'none';
             signupForm.reset();
             alert('Înregistrare reușită! Bine ai venit, ' + name + '!');
         });
 
-        // Eveniment pentru butonul de start test
-        startTestBtn.addEventListener('click', function() {
+        // Eveniment pentru butonul de generare exerciții
+        generateExerciseBtn.addEventListener('click', function() {
+            generateNewExercise();
+        });
+
+        // Eveniment pentru verificarea răspunsului la exercițiu
+        checkAnswerBtn.addEventListener('click', function() {
+            checkExerciseAnswer();
+        });
+
+        // Funcție pentru generarea unui nou exercițiu
+        function generateNewExercise() {
+            const topic = topicSelect.value;
+            const difficulty = difficultySelect.value;
+            const type = exerciseType.value;
+            
+            // Selectează exerciții din baza de date în funcție de topic
+            let availableExercises = [];
+            if (topic === 'all') {
+                // Combină toate exercițiile din toate topic-urile
+                Object.values(exerciseDatabase).forEach(exercises => {
+                    availableExercises = availableExercises.concat(exercises);
+                });
+            } else {
+                availableExercises = exerciseDatabase[topic] || [];
+            }
+            
+            // Alege un exercițiu aleatoriu
+            if (availableExercises.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableExercises.length);
+                const exercise = availableExercises[randomIndex];
+                
+                // Actualizează interfața cu noul exercițiu
+                exerciseQuestion.textContent = exercise.question;
+                
+                // Generează opțiunile de răspuns
+                exerciseOptions.innerHTML = '';
+                exercise.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'exercise-option';
+                    optionElement.textContent = option;
+                    optionElement.setAttribute('data-correct', index === exercise.correct ? 'true' : 'false');
+                    optionElement.addEventListener('click', function() {
+                        // Elimină selecția precedentă
+                        document.querySelectorAll('.exercise-option').forEach(opt => {
+                            opt.style.backgroundColor = '';
+                            opt.style.borderColor = '#e9ecef';
+                        });
+                        
+                        // Selectează opțiunea curentă
+                        this.style.backgroundColor = 'rgba(76, 181, 174, 0.1)';
+                        this.style.borderColor = 'var(--accent)';
+                    });
+                    exerciseOptions.appendChild(optionElement);
+                });
+                
+                // Ascunde feedback-ul anterior
+                exerciseFeedback.style.display = 'none';
+                
+                // Afișează exercițiul
+                generatedExercise.style.display = 'block';
+                
+                // Salvează exercițiul curent pentru verificare
+                generatedExercise.currentExercise = exercise;
+            } else {
+                alert('Nu există exerciții disponibile pentru acest topic. Încearcă alt topic.');
+            }
+        }
+
+        // Funcție pentru verificarea răspunsului la exercițiu
+        function checkExerciseAnswer() {
+            const selectedOption = document.querySelector('.exercise-option[style*="background-color"]');
+            
+            if (!selectedOption) {
+                alert('Te rugăm să selectezi un răspuns înainte de a verifica!');
+                return;
+            }
+            
+            const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+            
+            // Afișează feedback-ul
+            exerciseFeedback.textContent = isCorrect ? 
+                `✓ Corect! ${generatedExercise.currentExercise.explanation}` : 
+                `✗ Incorect. Răspunsul corect este: ${generatedExercise.currentExercise.options[generatedExercise.currentExercise.correct]}. ${generatedExercise.currentExercise.explanation}`;
+            
+            exerciseFeedback.className = `exercise-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            exerciseFeedback.style.display = 'block';
+            
+            // Actualizează progresul utilizatorului dacă este autentificat
             const user = JSON.parse(localStorage.getItem('chemAIUser'));
             if (user) {
-                alert('Testul inițial va începe în curând! Această funcționalitate va fi implementată complet în versiunea finală.');
-                // Aici s-ar deschide testul efectiv
-            } else {
-                alert('Trebuie să fii autentificat pentru a accesa testul inițial.');
-                loginModal.style.display = 'flex';
+                updateUserProgress(isCorrect);
+            }
+        }
+
+        // Funcție pentru actualizarea progresului utilizatorului
+        function updateUserProgress(isCorrect) {
+            let userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            
+            if (userProgress) {
+                // Actualizează numărul de exerciții completate
+                userProgress.exercisesCompleted += 1;
+                
+                // Actualizează scorul mediu (simplificat)
+                const currentScore = userProgress.averageScore;
+                const newScore = isCorrect ? 
+                    Math.min(currentScore + 2, 100) : 
+                    Math.max(currentScore - 1, 0);
+                userProgress.averageScore = newScore;
+                
+                // Actualizează progresul nivelului
+                userProgress.levelProgress = Math.min(userProgress.levelProgress + (isCorrect ? 2 : 0.5), 100);
+                
+                // Verifică dacă utilizatorul a promovat la următorul nivel
+                if (userProgress.levelProgress >= 100) {
+                    if (userProgress.level === 'beginner') {
+                        userProgress.level = 'intermediate';
+                        userProgress.levelProgress = 0;
+                        alert('Felicitări! Ai promovat la nivelul Intermediar!');
+                    } else if (userProgress.level === 'intermediate') {
+                        userProgress.level = 'advanced';
+                        userProgress.levelProgress = 0;
+                        alert('Felicitări! Ai promovat la nivelul Avansat!');
+                    }
+                }
+                
+                // Salvează progresul actualizat
+                localStorage.setItem('chemAIUserProgress', JSON.stringify(userProgress));
+                
+                // Actualizează UI-ul
+                updateProgressUI(userProgress);
+            }
+        }
+
+        // Funcție pentru inițializarea testului
+        function initializeTest() {
+            // Generează întrebări pentru test
+            testState.questions = [];
+            Object.values(exerciseDatabase).forEach(exercises => {
+                if (exercises.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * exercises.length);
+                    testState.questions.push(exercises[randomIndex]);
+                }
+            });
+            
+            // Limitează la 10 întrebări
+            testState.questions = testState.questions.slice(0, 10);
+            testState.userAnswers = new Array(testState.questions.length).fill(null);
+            
+            // Afișează prima întrebare
+            displayTestQuestion(0);
+        }
+
+        // Funcție pentru afișarea unei întrebări din test
+        function displayTestQuestion(index) {
+            if (index < 0 || index >= testState.questions.length) return;
+            
+            const question = testState.questions[index];
+            testQuestion.textContent = question.question;
+            
+            // Generează opțiunile de răspuns
+            testOptions.innerHTML = '';
+            question.options.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'exercise-option';
+                optionElement.textContent = option;
+                optionElement.setAttribute('data-correct', optionIndex === question.correct ? 'true' : 'false');
+                optionElement.addEventListener('click', function() {
+                    // Elimină selecția precedentă
+                    document.querySelectorAll('#testOptions .exercise-option').forEach(opt => {
+                        opt.style.backgroundColor = '';
+                        opt.style.borderColor = '#e9ecef';
+                    });
+                    
+                    // Selectează opțiunea curentă
+                    this.style.backgroundColor = 'rgba(76, 181, 174, 0.1)';
+                    this.style.borderColor = 'var(--accent)';
+                    
+                    // Salvează răspunsul utilizatorului
+                    testState.userAnswers[index] = optionIndex;
+                });
+                testOptions.appendChild(optionElement);
+            });
+            
+            // Actualizează indicatorul de progres
+            currentQuestion.textContent = `${index + 1}/${testState.questions.length}`;
+            
+            // Actualizează butoanele de navigare
+            prevQuestionBtn.disabled = index === 0;
+            nextQuestionBtn.textContent = index === testState.questions.length - 1 ? 
+                'Finalizează Testul' : 'Următoarea Întrebare';
+            
+            // Restabilește selecția dacă utilizatorul a răspuns deja la această întrebare
+            if (testState.userAnswers[index] !== null) {
+                const options = document.querySelectorAll('#testOptions .exercise-option');
+                if (options[testState.userAnswers[index]]) {
+                    options[testState.userAnswers[index]].style.backgroundColor = 'rgba(76, 181, 174, 0.1)';
+                    options[testState.userAnswers[index]].style.borderColor = 'var(--accent)';
+                }
+            }
+            
+            testState.currentQuestionIndex = index;
+        }
+
+        // Eveniment pentru butonul de întrebare anterioară
+        prevQuestionBtn.addEventListener('click', function() {
+            if (testState.currentQuestionIndex > 0) {
+                displayTestQuestion(testState.currentQuestionIndex - 1);
             }
         });
+
+        // Eveniment pentru butonul de întrebare următoare
+        nextQuestionBtn.addEventListener('click', function() {
+            if (testState.userAnswers[testState.currentQuestionIndex] === null) {
+                alert('Te rugăm să selectezi un răspuns înainte de a continua!');
+                return;
+            }
+            
+            if (testState.currentQuestionIndex < testState.questions.length - 1) {
+                displayTestQuestion(testState.currentQuestionIndex + 1);
+            } else {
+                // Finalizează testul
+                finishTest();
+            }
+        });
+
+        // Funcție pentru finalizarea testului
+        function finishTest() {
+            // Calculează scorul
+            let correctCount = 0;
+            testState.questions.forEach((question, index) => {
+                if (testState.userAnswers[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+            
+            testState.score = (correctCount / testState.questions.length) * 100;
+            
+            // Actualizează UI-ul cu rezultatele
+            correctAnswers.textContent = correctCount;
+            testScore.textContent = `${Math.round(testState.score)}%`;
+            
+            // Afișează rezultatele
+            alert(`Test finalizat!\n\nAi răspuns corect la ${correctCount} din ${testState.questions.length} întrebări.\nScorul tău: ${Math.round(testState.score)}%`);
+            
+            // Resetează testul
+            setTimeout(() => {
+                testState.currentQuestionIndex = 0;
+                testState.userAnswers = new Array(testState.questions.length).fill(null);
+                displayTestQuestion(0);
+                correctAnswers.textContent = '0';
+                testScore.textContent = '0%';
+            }, 2000);
+        }
 
         // Funcție pentru demo-ul interactiv
         function checkAnswer(element, selected) {
