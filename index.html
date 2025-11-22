@@ -993,6 +993,28 @@
             text-align: center;
             display: none;
         }
+/* Stiluri pentru Modele 3D */
+#model-container {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
+}
+
+#model-loader {
+    text-align: center;
+    padding: 3rem;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
         
         .visual-image {
             max-width: 100%;
@@ -1410,7 +1432,7 @@
                 <li><a href="#contact" class="public-section">Contact</a></li>
 <li><a href="#modele-3d" class="public-section">Modele 3D</a></li>
             </ul>
-          <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6920b776d8410c919e91dc57,6920a0444eab316f9b17ae5f,agent</script>
+           <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6920b776d8410c919e91dc57,6920a0444eab316f9b17ae5f,agent</script>
             <div class="auth-buttons" id="authButtons">
                 <button class="auth-btn login-btn" id="loginBtn">Autentificare</button>
                 <button class="auth-btn signup" id="signupBtn">Înregistrare</button>
@@ -1829,56 +1851,35 @@
     </section>
 
     <!-- PAGINA NOUĂ PENTRU MODELE 3D -->
-   <section class="page" id="modele-3d-page">
-    <h2 class="section-title">Modele 3D Interactive</h2>
-    <p class="section-subtitle">Explorează chimia într-un mod vizual și interactiv</p>
-    
-    <div class="dashboard-grid" id="models-grid">
-        <div class="dashboard-card" data-model-type="tabel-periodic">
-            <div class="dashboard-icon"><i class="fas fa-table"></i></div>
-            <h3>Tabelul Periodic 3D</h3>
-            <p>Explorează tabelul lui Mendeleev în 3D cu proprietățile elementelor</p>
-        </div>
+    <section class="page" id="modele-3d-page">
+        <h2 class="section-title">Modele 3D Interactive</h2>
+        <p class="section-subtitle">Explorează chimia într-un mod vizual și interactiv</p>
         
-        <div class="dashboard-card" data-model-type="compusi-organici">
-            <div class="dashboard-icon"><i class="fas fa-atom"></i></div>
-            <h3>Compuși Organici 3D</h3>
-            <p>Studiază structura moleculară a compușilor organici în 3D</p>
-        </div>
-    </div>
-    
-    <div id="model-viewer" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-            <h3 id="model-title">Model 3D</h3>
-            <button class="btn" id="back-to-models-btn">
-                <i class="fas fa-arrow-left"></i>
-                Înapoi la Modele
-            </button>
-        </div>
-        
-        <div style="background: white; border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow);">
-            <div style="margin-bottom: 1.5rem;">
-                <p id="model-description">Descrierea modelului 3D...</p>
+        <div class="dashboard-grid">
+            <div class="dashboard-card" onclick="openModel('tabel-periodic')">
+                <div class="dashboard-icon"><i class="fas fa-table"></i></div>
+                <h3>Tabelul Periodic 3D</h3>
+                <p>Explorează tabelul lui Mendeleev în 3D cu proprietățile elementelor</p>
             </div>
             
-            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-                <a href="https://www.evaluareinteractiva.ro/resurse-educationale/chimie-sistemul-periodic-al-elementelor.html" 
-                   target="_blank" class="btn" style="background: var(--primary);">
-                    <i class="fas fa-external-link-alt"></i>
-                    Deschide Tabelul Periodic 3D
-                </a>
-                <button class="btn" onclick="showPreview('tabel-periodic')" style="background: var(--accent);">
-                    <i class="fas fa-eye"></i>
-                    Vezi Previzualizare
+            <div class="dashboard-card" onclick="openModel('compusi-organici')">
+                <div class="dashboard-icon"><i class="fas fa-atom"></i></div>
+                <h3>Compuși Organici 3D</h3>
+                <p>Studiază structura moleculară a compușilor organici în 3D</p>
+            </div>
+        </div>
+        
+        <div id="model-container" style="display: none; margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 id="model-title">Model 3D</h3>
+                <button class="auth-btn" onclick="closeModel()">
+                    <i class="fas fa-times"></i>
+                    Închide
                 </button>
             </div>
-            
-            <div id="model-preview" style="display: none; margin-top: 2rem;">
-                <iframe id="preview-iframe" width="100%" height="500" style="border: none; border-radius: var(--radius);"></iframe>
-            </div>
+            <iframe id="model-iframe" width="100%" height="600" style="border: none; border-radius: var(--radius);"></iframe>
         </div>
-    </div>
-</section>
+    </section>
 
     <section class="page" id="contact-page">
         <footer>
@@ -3094,67 +3095,81 @@
             }
         });
 
-        // FUNCȚII ÎMBUNĂTĂȚITE PENTRU MODELE 3D
-function showModelViewer(type) {
-    const modelsGrid = document.getElementById('models-grid');
-    const modelViewer = document.getElementById('model-viewer');
+        // FUNCȚII NOI PENTRU MODELE 3D
+        // FUNCȚII NOI PENTRU MODELE 3D
+// FUNCȚII NOI PENTRU MODELE 3D
+function openModel(type) {
+    const modelContainer = document.getElementById('model-container');
+    const modelIframe = document.getElementById('model-iframe');
     const modelTitle = document.getElementById('model-title');
-    const modelDescription = document.getElementById('model-description');
     
-    // Ascunde grid-ul și afișează viewer-ul
-    modelsGrid.style.display = 'none';
-    modelViewer.style.display = 'block';
+    // Ascunde iframe-ul inițial și arată un loader
+    modelIframe.style.display = 'none';
+    
+    // Adaugă un loader temporar
+    let loader = document.getElementById('model-loader');
+    if (!loader) {
+        loader = document.createElement('div');
+        loader.id = 'model-loader';
+        loader.innerHTML = `
+            <div style="text-align: center; padding: 3rem;">
+                <div class="dashboard-icon"><i class="fas fa-spinner fa-spin"></i></div>
+                <h3>Se încarcă modelul 3D...</h3>
+                <p>Vă rugăm să așteptați</p>
+            </div>
+        `;
+        modelContainer.appendChild(loader);
+    }
+    loader.style.display = 'block';
     
     if (type === 'tabel-periodic') {
+        modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/sistemul-periodic-al-elementelor-tabelul-lui-mendeleev.html';
         modelTitle.textContent = 'Tabelul Periodic 3D';
-        modelDescription.textContent = 'Explorează tabelul periodic al elementelor în format 3D interactiv. Poți vedea proprietățile fiecărui element, grupele și perioadele într-o manieră vizuală și engaging.';
     } else if (type === 'compusi-organici') {
+        modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/index.html';
         modelTitle.textContent = 'Compuși Organici 3D';
-        modelDescription.textContent = 'Studiază structura moleculară a compușilor organici în 3D. Explorează legăturile carbonului și proprietățile diferitelor clase de compuși organici.';
     }
     
-    // Ascunde orice previzualizare anterioară
-    document.getElementById('model-preview').style.display = 'none';
+    modelContainer.style.display = 'block';
+    
+    // Când iframe-ul s-a încărcat, ascunde loader-ul și arată iframe-ul
+    modelIframe.onload = function() {
+        loader.style.display = 'none';
+        modelIframe.style.display = 'block';
+        
+        // Scroll la model după ce s-a încărcat complet
+        setTimeout(() => {
+            modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500);
+    };
+    
+    // Fallback: dacă iframe-ul nu se încarcă în 5 secunde, tot arată conținutul
+    setTimeout(() => {
+        loader.style.display = 'none';
+        modelIframe.style.display = 'block';
+        modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 5000);
 }
 
-function showPreview(type) {
-    const preview = document.getElementById('model-preview');
-    const iframe = document.getElementById('preview-iframe');
+function closeModel() {
+    const modelContainer = document.getElementById('model-container');
+    const modelIframe = document.getElementById('model-iframe');
     
-    if (type === 'tabel-periodic') {
-        iframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/sistemul-periodic-al-elementelor-tabelul-lui-mendeleev.html';
-    } else if (type === 'compusi-organici') {
-        iframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/index.html';
+    modelContainer.style.display = 'none';
+    modelIframe.src = '';
+    
+    // Ascunde loader-ul pentru data viitoare
+    const loader = document.getElementById('model-loader');
+    if (loader) {
+        loader.style.display = 'none';
     }
+    modelIframe.style.display = 'none';
     
-    preview.style.display = 'block';
-    preview.scrollIntoView({ behavior: 'smooth' });
+    // Scroll înapoi la carduri
+    setTimeout(() => {
+        document.querySelector('.dashboard-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
 }
-
-function backToModels() {
-    const modelsGrid = document.getElementById('models-grid');
-    const modelViewer = document.getElementById('model-viewer');
-    
-    modelViewer.style.display = 'none';
-    modelsGrid.style.display = 'grid';
-}
-
-// Evenimente pentru modele 3D
-document.addEventListener('DOMContentLoaded', function() {
-    // Butonul de back
-    const backBtn = document.getElementById('back-to-models-btn');
-    if (backBtn) {
-        backBtn.addEventListener('click', backToModels);
-    }
-    
-    // Cardurile modelelor
-    document.querySelectorAll('#modele-3d-page .dashboard-card[data-model-type]').forEach(card => {
-        card.addEventListener('click', function() {
-            const modelType = this.getAttribute('data-model-type');
-            showModelViewer(modelType);
-        });
-    });
-});
     </script>
 </body>
 </html>
