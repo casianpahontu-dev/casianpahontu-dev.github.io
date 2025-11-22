@@ -1011,7 +1011,7 @@
         .chatbot-container {
             position: fixed;
             bottom: 30px;
-left: 30px;
+            left: 30px;
             right: auto;
             z-index: 1000;
         }
@@ -1047,7 +1047,7 @@ left: 30px;
             position: absolute;
             bottom: 90px;
             left: 0;
-right: auto;
+            right: auto;
             width: 380px;
             height: 550px;
             background: white;
@@ -1408,8 +1408,9 @@ right: auto;
                 <li><a href="#test-initial" class="protected-section">Test</a></li>
                 <li><a href="#testimoniale" class="public-section">Păreri</a></li>
                 <li><a href="#contact" class="public-section">Contact</a></li>
+<li><a href="#modele-3d" class="public-section">Modele 3D</a></li>
             </ul>
-           <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6920b776d8410c919e91dc57,6920a0444eab316f9b17ae5f,agent</script>
+          <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6920b776d8410c919e91dc57,6920a0444eab316f9b17ae5f,agent</script>
             <div class="auth-buttons" id="authButtons">
                 <button class="auth-btn login-btn" id="loginBtn">Autentificare</button>
                 <button class="auth-btn signup" id="signupBtn">Înregistrare</button>
@@ -1477,6 +1478,13 @@ right: auto;
                 <div class="dashboard-icon"><i class="fas fa-envelope"></i></div>
                 <h3>Contact</h3>
                 <p>Ia legătura cu noi pentru întrebări și suport</p>
+            </div>
+
+            <!-- CARD NOU PENTRU MODELE 3D -->
+            <div class="dashboard-card" data-page="modele-3d-page">
+                <div class="dashboard-icon"><i class="fas fa-cube"></i></div>
+                <h3>Modele 3D</h3>
+                <p>Explorează tabelul periodic și compușii organici în 3D</p>
             </div>
         </div>
     </section>
@@ -1820,6 +1828,58 @@ right: auto;
         </div>
     </section>
 
+    <!-- PAGINA NOUĂ PENTRU MODELE 3D -->
+   <section class="page" id="modele-3d-page">
+    <h2 class="section-title">Modele 3D Interactive</h2>
+    <p class="section-subtitle">Explorează chimia într-un mod vizual și interactiv</p>
+    
+    <div class="dashboard-grid" id="models-grid">
+        <div class="dashboard-card" data-model-type="tabel-periodic">
+            <div class="dashboard-icon"><i class="fas fa-table"></i></div>
+            <h3>Tabelul Periodic 3D</h3>
+            <p>Explorează tabelul lui Mendeleev în 3D cu proprietățile elementelor</p>
+        </div>
+        
+        <div class="dashboard-card" data-model-type="compusi-organici">
+            <div class="dashboard-icon"><i class="fas fa-atom"></i></div>
+            <h3>Compuși Organici 3D</h3>
+            <p>Studiază structura moleculară a compușilor organici în 3D</p>
+        </div>
+    </div>
+    
+    <div id="model-viewer" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h3 id="model-title">Model 3D</h3>
+            <button class="btn" id="back-to-models-btn">
+                <i class="fas fa-arrow-left"></i>
+                Înapoi la Modele
+            </button>
+        </div>
+        
+        <div style="background: white; border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow);">
+            <div style="margin-bottom: 1.5rem;">
+                <p id="model-description">Descrierea modelului 3D...</p>
+            </div>
+            
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <a href="https://www.evaluareinteractiva.ro/resurse-educationale/chimie-sistemul-periodic-al-elementelor.html" 
+                   target="_blank" class="btn" style="background: var(--primary);">
+                    <i class="fas fa-external-link-alt"></i>
+                    Deschide Tabelul Periodic 3D
+                </a>
+                <button class="btn" onclick="showPreview('tabel-periodic')" style="background: var(--accent);">
+                    <i class="fas fa-eye"></i>
+                    Vezi Previzualizare
+                </button>
+            </div>
+            
+            <div id="model-preview" style="display: none; margin-top: 2rem;">
+                <iframe id="preview-iframe" width="100%" height="500" style="border: none; border-radius: var(--radius);"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
     <section class="page" id="contact-page">
         <footer>
             <div class="footer-content">
@@ -1980,7 +2040,8 @@ right: auto;
             'exercitii-page': 'Exerciții',
             'test-page': 'Test Inițial',
             'testimoniale-page': 'Păreri',
-            'contact-page': 'Contact'
+            'contact-page': 'Contact',
+            'modele-3d-page': 'Modele 3D' // ADAUGAT
         };
 
         const backButton = document.getElementById('backButton');
@@ -2468,7 +2529,8 @@ right: auto;
                     'exercitii': 'exercitii-page',
                     'test-initial': 'test-page',
                     'testimoniale': 'testimoniale-page',
-                    'contact': 'contact-page'
+                    'contact': 'contact-page',
+ 'modele-3d': 'modele-3d-page'
                 };
                 
                 if (pageMap[target]) {
@@ -3031,6 +3093,68 @@ right: auto;
                 }, 500);
             }
         });
+
+        // FUNCȚII ÎMBUNĂTĂȚITE PENTRU MODELE 3D
+function showModelViewer(type) {
+    const modelsGrid = document.getElementById('models-grid');
+    const modelViewer = document.getElementById('model-viewer');
+    const modelTitle = document.getElementById('model-title');
+    const modelDescription = document.getElementById('model-description');
+    
+    // Ascunde grid-ul și afișează viewer-ul
+    modelsGrid.style.display = 'none';
+    modelViewer.style.display = 'block';
+    
+    if (type === 'tabel-periodic') {
+        modelTitle.textContent = 'Tabelul Periodic 3D';
+        modelDescription.textContent = 'Explorează tabelul periodic al elementelor în format 3D interactiv. Poți vedea proprietățile fiecărui element, grupele și perioadele într-o manieră vizuală și engaging.';
+    } else if (type === 'compusi-organici') {
+        modelTitle.textContent = 'Compuși Organici 3D';
+        modelDescription.textContent = 'Studiază structura moleculară a compușilor organici în 3D. Explorează legăturile carbonului și proprietățile diferitelor clase de compuși organici.';
+    }
+    
+    // Ascunde orice previzualizare anterioară
+    document.getElementById('model-preview').style.display = 'none';
+}
+
+function showPreview(type) {
+    const preview = document.getElementById('model-preview');
+    const iframe = document.getElementById('preview-iframe');
+    
+    if (type === 'tabel-periodic') {
+        iframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/sistemul-periodic-al-elementelor-tabelul-lui-mendeleev.html';
+    } else if (type === 'compusi-organici') {
+        iframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/index.html';
+    }
+    
+    preview.style.display = 'block';
+    preview.scrollIntoView({ behavior: 'smooth' });
+}
+
+function backToModels() {
+    const modelsGrid = document.getElementById('models-grid');
+    const modelViewer = document.getElementById('model-viewer');
+    
+    modelViewer.style.display = 'none';
+    modelsGrid.style.display = 'grid';
+}
+
+// Evenimente pentru modele 3D
+document.addEventListener('DOMContentLoaded', function() {
+    // Butonul de back
+    const backBtn = document.getElementById('back-to-models-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', backToModels);
+    }
+    
+    // Cardurile modelelor
+    document.querySelectorAll('#modele-3d-page .dashboard-card[data-model-type]').forEach(card => {
+        card.addEventListener('click', function() {
+            const modelType = this.getAttribute('data-model-type');
+            showModelViewer(modelType);
+        });
+    });
+});
     </script>
 </body>
 </html>
