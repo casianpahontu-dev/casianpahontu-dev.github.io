@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChemAI - Învățare Personalizată la Chimie</title>
+    <title>EduAI – Învățare Personalizată la Chimie pentru Liceeni</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -199,12 +199,13 @@
             -webkit-text-fill-color: var(--accent);
         }
         
-        .nav-links {
+         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
+            align-items: center;
         }
-        
+
         .nav-links a {
             color: var(--dark);
             text-decoration: none;
@@ -212,6 +213,7 @@
             transition: var(--transition);
             position: relative;
             padding: 0.5rem 0;
+            white-space: nowrap;
         }
         
         .nav-links a::after {
@@ -233,7 +235,7 @@
             width: 100%;
         }
         
-        .auth-buttons {
+         .auth-buttons {
             display: flex;
             gap: 1rem;
         }
@@ -993,28 +995,6 @@
             text-align: center;
             display: none;
         }
-/* Stiluri pentru Modele 3D */
-#model-container {
-    background: white;
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    margin-top: 2rem;
-}
-
-#model-loader {
-    text-align: center;
-    padding: 3rem;
-}
-
-.fa-spinner {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
         
         .visual-image {
             max-width: 100%;
@@ -1029,6 +1009,137 @@
             margin-top: 1rem;
         }
         
+        /* Stiluri pentru Modele 3D */
+        #model-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        #model-loader {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Stiluri pentru elemente de engagement pentru liceeni */
+        .achievement-system {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .achievement {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .achievement:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-color: #ffd700;
+        }
+
+        .achievement i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .bac-preparation {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .bac-subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .bac-subject {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .learning-path {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .path-step {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: var(--shadow);
+        }
+
+        .path-step.completed {
+            border-color: var(--success);
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .path-step.current {
+            border-color: var(--accent);
+            background: rgba(76, 181, 174, 0.1);
+            transform: scale(1.05);
+        }
+
+        .ai-recommendation {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            color: white;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         /* Chatbot Styles */
         .chatbot-container {
             position: fixed;
@@ -1290,6 +1401,86 @@
             color: #aaa;
         }
         
+        /* Stiluri pentru subiectele BAC */
+        .bac-subject-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .bac-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 1.5rem;
+        }
+        
+        .bac-title {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .bac-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bac-instructions {
+            background: #f8fbff;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .bac-question {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bac-question-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .bac-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .bac-option {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            border: 1px solid #e9ecef;
+            transition: var(--transition);
+        }
+        
+        .bac-option:hover {
+            background: #e9ecef;
+        }
+        
+        .bac-answer {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .bac-answer.show {
+            display: block;
+        }
+        
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero h1 {
@@ -1298,6 +1489,10 @@
             
             .section-title {
                 font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                max-width: 500px;
             }
         }
         
@@ -1371,6 +1566,16 @@
             .page {
                 padding: 1rem;
             }
+
+            .achievements-grid,
+            .bac-subjects,
+            .learning-path {
+                grid-template-columns: 1fr;
+            }
+            
+            .bac-subject-content {
+                padding: 2rem 1.5rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1403,6 +1608,10 @@
             .dashboard-card {
                 padding: 2rem 1.5rem;
             }
+            
+            .bac-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -1414,25 +1623,26 @@
             <button class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <div class="page-title" id="pageTitle">ChemAI</div>
+            <div class="page-title" id="pageTitle">EduAI</div>
             <div></div> <!-- Spacer pentru aliniere -->
         </div>
     </div>
 
     <header id="mainHeader">
         <nav>
-            <div class="logo">Chem<span>AI</span></div>
+            <div class="logo">Edu<span>AI</span></div>
             <ul class="nav-links">
                 <li><a href="#despre" class="public-section">Despre</a></li>
                 <li><a href="#functionalitati" class="public-section">Funcționalități</a></li>
                 <li><a href="#progres" class="protected-section">Progres</a></li>
                 <li><a href="#exercitii" class="protected-section">Exerciții</a></li>
                 <li><a href="#test-initial" class="protected-section">Test</a></li>
+                <li><a href="#bacalaureat" class="protected-section">BAC</a></li>
+                <li><a href="#modele-3d" class="public-section">Modele 3D</a></li>
                 <li><a href="#testimoniale" class="public-section">Păreri</a></li>
                 <li><a href="#contact" class="public-section">Contact</a></li>
-<li><a href="#modele-3d" class="public-section">Modele 3D</a></li>
             </ul>
-           <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>6920b776d8410c919e91dc57,6920a0444eab316f9b17ae5f,agent</script>
+            <script id="messenger-widget-b" src="https://cdn.botpenguin.com/website-bot.js" defer>692b7f1fd8410c919e01a974,692b7e095d4c85e1eb02b06d,agent</script>
             <div class="auth-buttons" id="authButtons">
                 <button class="auth-btn login-btn" id="loginBtn">Autentificare</button>
                 <button class="auth-btn signup" id="signupBtn">Înregistrare</button>
@@ -1462,7 +1672,7 @@
         <div class="dashboard-grid">
             <div class="dashboard-card" data-page="despre-page">
                 <div class="dashboard-icon"><i class="fas fa-info-circle"></i></div>
-                <h3>Despre ChemAI</h3>
+                <h3>Despre EduAI</h3>
                 <p>Află mai multe despre platforma noastră și cum te poate ajuta să înveți chimia</p>
             </div>
             
@@ -1489,11 +1699,17 @@
                 <h3>Test Inițial</h3>
                 <p>Completează testul pentru a-ți evalua nivelul</p>
             </div>
+
+            <div class="dashboard-card protected-card" data-page="bacalaureat-page">
+                <div class="dashboard-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Pregătire BAC</h3>
+                <p>Teste simulate și subiecte din ani anteriori</p>
+            </div>
             
             <div class="dashboard-card" data-page="testimoniale-page">
                 <div class="dashboard-icon"><i class="fas fa-comments"></i></div>
                 <h3>Păreri</h3>
-                <p>Vezi ce spun alți elevi despre ChemAI</p>
+                <p>Vezi ce spun alți elevi despre EduAI</p>
             </div>
             
             <div class="dashboard-card" data-page="contact-page">
@@ -1502,20 +1718,44 @@
                 <p>Ia legătura cu noi pentru întrebări și suport</p>
             </div>
 
-            <!-- CARD NOU PENTRU MODELE 3D -->
+            <!-- CARD PENTRU MODELE 3D -->
             <div class="dashboard-card" data-page="modele-3d-page">
                 <div class="dashboard-icon"><i class="fas fa-cube"></i></div>
                 <h3>Modele 3D</h3>
                 <p>Explorează tabelul periodic și compușii organici în 3D</p>
             </div>
         </div>
+
+        <!-- Elemente de engagement pentru liceeni -->
+        <div class="achievement-system">
+            <h3><i class="fas fa-trophy"></i> Sistemul tău de Realizări</h3>
+            <p>Obține badge-uri și deblochează realizări pe măsură ce progresezi!</p>
+            
+            <div class="achievements-grid">
+                <div class="achievement" data-badge="atom-master">
+                    <i class="fas fa-atom"></i>
+                    <span>Maestrul Atomilor</span>
+                    <small>Finalizează 10 exerciții despre structura atomică</small>
+                </div>
+                <div class="achievement" data-badge="reaction-pro">
+                    <i class="fas fa-vial"></i>
+                    <span>Expert în Reacții</span>
+                    <small>Echilibrează 20 de ecuații chimice</small>
+                </div>
+                <div class="achievement" data-badge="bac-ready">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Pregătit pentru BAC</span>
+                    <small>Completează 5 teste simulate</small>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Pagini individuale -->
     <section class="page" id="despre-page">
-        <h2 class="section-title">Despre ChemAI</h2>
+        <h2 class="section-title">Despre EduAI</h2>
         <p class="section-subtitle">
-            ChemAI este o aplicație de învățare personalizată la chimie, construită pe tehnologii de inteligență artificială. 
+            EduAI este o aplicație de învățare personalizată la chimie, construită pe tehnologii de inteligență artificială. 
             Sistemul analizează progresul tău și se adaptează pentru a-ți oferi explicații, exerciții și feedback perfect potrivite nevoilor tale.
         </p>
         
@@ -1647,6 +1887,26 @@
                     <div>Începe-ți azi seria!</div>
                 </div>
             </div>
+
+            <!-- Traseu de învățare personalizat -->
+            <div class="learning-path">
+                <div class="path-step completed">
+                    <h4>Atomi și Structura Atomică</h4>
+                    <p>✅ Finalizat</p>
+                </div>
+                <div class="path-step current">
+                    <h4>Tabelul Periodic</h4>
+                    <p>🔄 În progres</p>
+                </div>
+                <div class="path-step">
+                    <h4>Legături Chimice</h4>
+                    <p>⏳ Urmează</p>
+                </div>
+                <div class="path-step">
+                    <h4>Reacții Chimice</h4>
+                    <p>⏳ Urmează</p>
+                </div>
+            </div>
             
             <div class="recommendations">
                 <h3><i class="fas fa-lightbulb"></i> Recomandări Personalizate</h3>
@@ -1655,6 +1915,12 @@
                     <li><i class="fas fa-check-circle"></i> Începe cu exercițiile de bază despre atomi și structura atomică</li>
                     <li><i class="fas fa-check-circle"></i> Folosește chatbot-ul pentru a pune întrebări despre concepte neclare</li>
                 </ul>
+            </div>
+
+            <!-- Recomandare AI -->
+            <div class="ai-recommendation">
+                <h4><i class="fas fa-robot"></i> Recomandare AI</h4>
+                <p>Pe baza progresului tău, recomand să te concentrezi pe <strong>Tabelul Periodic</strong>. Ai o rată de succes de 75% la acest subiect și poți atinge nivelul intermediar în 2-3 sesiuni de studiu.</p>
             </div>
         </div>
     </section>
@@ -1810,13 +2076,129 @@
         </div>
     </section>
 
+    <!-- PAGINA PENTRU BACALAUREAT -->
+    <section class="page" id="bacalaureat-page">
+        <h2 class="section-title">Pregătire pentru Bacalaureat</h2>
+        <p class="section-subtitle">Pregătește-te eficient pentru examenul de bacalaureat cu teste simulate și subiecte din ani anteriori</p>
+        
+        <div class="bac-preparation">
+            <h3><i class="fas fa-graduation-cap"></i> Teste Simulate BAC 2024</h3>
+            <p>Exersează cu teste care simulează condițiile reale ale examenului de bacalaureat</p>
+            
+            <div class="bac-subjects">
+                <div class="bac-subject">
+                    <h4>Chimie Anorganică</h4>
+                    <p>Subiecte din 2024</p>
+                    <p>Structura atomică, tabelul periodic, legături chimice</p>
+                    <button class="btn" style="margin-top: 1rem; background: var(--success);" onclick="loadBacSubject('anorganica-2024-var3')">
+                        <i class="fas fa-play"></i>
+                        Începe Test
+                    </button>
+                </div>
+                <div class="bac-subject">
+                    <h4>Chimie Organică</h4>
+                    <p>Subiecte din 2024</p>
+                    <p>Hidrocarburi, compuși organici, reacții specifice</p>
+                    <button class="btn" style="margin-top: 1rem; background: var(--warning);" onclick="loadBacSubject('organica-2024-var3')">
+                        <i class="fas fa-play"></i>
+                        Începe Test
+                    </button>
+                </div>
+                <div class="bac-subject">
+                    <h4>Test Combinat</h4>
+                    <p>Anorganică + Organică</p>
+                    <p>Simulare completă examen BAC</p>
+                    <button class="btn" style="margin-top: 1rem; background: var(--danger);" onclick="loadBacSubject('combinat-2024')">
+                        <i class="fas fa-play"></i>
+                        Începe Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <h3><i class="fas fa-history"></i> Subiecte din Ani Anteriori</h3>
+            <div class="progress-container">
+                <div class="progress-card">
+                    <div class="progress-title">BAC 2023</div>
+                    <div class="progress-value" id="bac2023Score">0%</div>
+                    <p>Scorul tău mediu</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('bac-2023')">
+                        <i class="fas fa-redo"></i>
+                        Refă Testul
+                    </button>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-title">BAC 2022</div>
+                    <div class="progress-value" id="bac2022Score">0%</div>
+                    <p>Scorul tău mediu</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('bac-2022')">
+                        <i class="fas fa-redo"></i>
+                        Refă Testul
+                    </button>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-title">BAC 2021</div>
+                    <div class="progress-value" id="bac2021Score">0%</div>
+                    <p>Scorul tău mediu</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('bac-2021')">
+                        <i class="fas fa-redo"></i>
+                        Refă Testul
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subiecte specifice din fișierele încărcate -->
+        <div class="dashboard" style="margin-top: 2rem;">
+            <h3><i class="fas fa-file-alt"></i> Subiecte Specifice BAC</h3>
+            <div class="progress-container">
+                <div class="progress-card">
+                    <div class="progress-title">Chimie Anorganică 2024</div>
+                    <div class="progress-value">Varianta 3</div>
+                    <p>Subiect complet cu barem</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('anorganica-2024-var3')">
+                        <i class="fas fa-eye"></i>
+                        Vezi Subiectul
+                    </button>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-title">Chimie Organică 2024</div>
+                    <div class="progress-value">Varianta 3</div>
+                    <p>Subiect complet cu barem</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('organica-2024-var3')">
+                        <i class="fas fa-eye"></i>
+                        Vezi Subiectul
+                    </button>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-title">Chimie Organică 2025</div>
+                    <div class="progress-value">Varianta 1</div>
+                    <p>Subiect model pentru 2025</p>
+                    <button class="auth-btn" style="margin-top: 1rem;" onclick="loadBacSubject('organica-2025-var1')">
+                        <i class="fas fa-eye"></i>
+                        Vezi Subiectul
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container pentru afișarea subiectelor BAC -->
+        <div id="bac-subject-container"></div>
+
+        <div class="ai-recommendation">
+            <h4><i class="fas fa-robot"></i> Strategie AI pentru BAC</h4>
+            <p>Pe baza performanței tale, recomand: <strong>2 sesiuni/săptămână de Chimie Organică</strong> și <strong>1 sesiune/săptămână de Chimie Anorganică</strong>. Estimat: <strong>peste 9.00</strong> la examen.</p>
+        </div>
+    </section>
+
     <section class="page" id="testimoniale-page">
-        <h2 class="section-title">Ce spun elevii care folosesc ChemAI</h2>
-        <p class="section-subtitle">Mii de elevi folosesc deja ChemAI pentru a-și îmbunătăți rezultatele la chimie</p>
+        <h2 class="section-title">Ce spun elevii care folosesc EduAI</h2>
+        <p class="section-subtitle">Mii de elevi folosesc deja EduAI pentru a-și îmbunătăți rezultatele la chimie</p>
         
         <div class="testimonial-grid">
             <div class="testimonial">
-                <p>"ChemAI m-a ajutat să înțeleg reacțiile redox care mi se păreau foarte complicate. Explicațiile personalizate și exercițiile adaptate au făcut diferența!"</p>
+                <p>"EduAI m-a ajutat să înțeleg reacțiile redox care mi se păreau foarte complicate. Explicațiile personalizate și exercițiile adaptate au făcut diferența!"</p>
                 <div class="testimonial-author">
                     <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Student">
                     <div>
@@ -1827,7 +2209,7 @@
             </div>
             
             <div class="testimonial">
-                <p>"Am reușit să trec de la nota 6 la 9 la chimie în doar 3 luni de utilizare a ChemAI. Recomand cu căldură tuturor colegilor mei!"</p>
+                <p>"Am reușit să trec de la nota 6 la 9 la chimie în doar 3 luni de utilizare a EduAI. Recomand cu căldură tuturor colegilor mei!"</p>
                 <div class="testimonial-author">
                     <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Student">
                     <div>
@@ -1838,7 +2220,7 @@
             </div>
             
             <div class="testimonial">
-                <p>"În sfârșit am înțeles cum să echilibrez ecuațiile chimice! ChemAI mi-a explicat pas cu pas până am priceput perfect."</p>
+                <p>"În sfârșit am înțeles cum să echilibrez ecuațiile chimice! EduAI mi-a explicat pas cu pas până am priceput perfect."</p>
                 <div class="testimonial-author">
                     <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Student">
                     <div>
@@ -1850,7 +2232,7 @@
         </div>
     </section>
 
-    <!-- PAGINA NOUĂ PENTRU MODELE 3D -->
+    <!-- PAGINA PENTRU MODELE 3D -->
     <section class="page" id="modele-3d-page">
         <h2 class="section-title">Modele 3D Interactive</h2>
         <p class="section-subtitle">Explorează chimia într-un mod vizual și interactiv</p>
@@ -1877,7 +2259,14 @@
                     Închide
                 </button>
             </div>
-            <iframe id="model-iframe" width="100%" height="600" style="border: none; border-radius: var(--radius);"></iframe>
+            <div id="model-loader">
+                <div style="text-align: center; padding: 3rem;">
+                    <div class="dashboard-icon"><i class="fas fa-spinner fa-spin"></i></div>
+                    <h3>Se încarcă modelul 3D...</h3>
+                    <p>Vă rugăm să așteptați</p>
+                </div>
+            </div>
+            <iframe id="model-iframe" width="100%" height="600" style="border: none; border-radius: var(--radius); display: none;"></iframe>
         </div>
     </section>
 
@@ -1885,7 +2274,7 @@
         <footer>
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>ChemAI</h3>
+                    <h3>EduAI</h3>
                     <p>Platforma inteligentă de învățare a chimiei, adaptată nevoilor tale.</p>
                     
                 </div>
@@ -1903,7 +2292,7 @@
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul>
-                        <li><a href="mailto:chemai@gmail.com"><i class="fas fa-envelope"></i> chemai@gmail.com</a></li>
+                        <li><a href="mailto:eduai@gmail.com"><i class="fas fa-envelope"></i> eduai@gmail.com</a></li>
                         <li><a href="tel:+40770507025"><i class="fas fa-phone"></i> +40 770 507 025</a></li>
                         <li><a href="#"><i class="fas fa-map-marker-alt"></i> Craiova, România</a></li>
                     </ul>
@@ -1936,7 +2325,7 @@
             <div class="chatbot-header">
                 <div class="chatbot-title">
                     <i class="fas fa-robot"></i>
-                    Asistent ChemAI
+                    Asistent EduAI
                 </div>
                 <button class="chatbot-close" id="chatbotClose">
                     <i class="fas fa-times"></i>
@@ -2034,15 +2423,16 @@
 
         // Sistem de navigare single-page
         const pages = {
-            'dashboard-page': 'ChemAI',
-            'despre-page': 'Despre ChemAI',
+            'dashboard-page': 'EduAI',
+            'despre-page': 'Despre EduAI',
             'functionalitati-page': 'Funcționalități',
             'progres-page': 'Progresul Tău',
             'exercitii-page': 'Exerciții',
             'test-page': 'Test Inițial',
+            'bacalaureat-page': 'Pregătire BAC',
             'testimoniale-page': 'Păreri',
             'contact-page': 'Contact',
-            'modele-3d-page': 'Modele 3D' // ADAUGAT
+            'modele-3d-page': 'Modele 3D'
         };
 
         const backButton = document.getElementById('backButton');
@@ -2134,45 +2524,100 @@
 
         // Baza de date pentru reprezentări vizuale
         const visualDatabase = {
-            "Au": {
-                image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                description: "Aurul (Au) este un metal prețios, moale, lucios, de culoare galbenă, care nu se oxidează în aer sau apă."
-            },
-            "Oxigen": {
-                image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                description: "Oxigenul (O) este un gaz incolor, inodor și insipid, esențial pentru respirația majorității organismelor vii."
-            },
-            "HCl": {
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Hydrochloric_acid_01.jpg/800px-Hydrochloric_acid_01.jpg",
-                description: "Acidul clorhidric (HCl) este o soluție apoasă a clorurii de hidrogen, un acid tare folosit în industrie și laboratoare."
-            },
-            "NaCl": {
-                image: "https://images.unsplash.com/photo-1589487391730-58f20eb2c308?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                description: "Clorura de sodiu (NaCl), cunoscută ca sare de masă, este un compus ionic esențial pentru viață."
-            },
-            "H₂O": {
-                image: "https://images.unsplash.com/photo-1551226421-ecfe4bb1191c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                description: "Apa (H₂O) este un compus chimic format din doi atomi de hidrogen și un atom de oxigen, esențial pentru viață."
-            },
-            "CH₄": {
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Methane-3D-space-filling.svg/800px-Methane-3D-space-filling.svg.png",
-                description: "Metanul (CH₄) este cea mai simplă hidrocarbură, un gaz incolor și inodor, component principal al gazelor naturale."
-            },
-            "CO₂": {
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Carbon_dioxide_3D_ball.png/800px-Carbon_dioxide_3D_ball.png",
-                description: "Dioxidul de carbon (CO₂) este un gaz incolor, esențial pentru fotosinteză și un important gaz cu efect de seră."
-            },
-            "NaOH": {
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Sodium_hydroxide.jpg/800px-Sodium_hydroxide.jpg",
-                description: "Hidroxidul de sodiu (NaOH), cunoscut ca sodă caustică, este o bază tare folosită în industrie."
-            },
-            "default": {
-                image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                description: "Reprezentarea vizuală a conceptului chimic corect."
-            }
-        };
+    "Au": {
+        image: "https://blog-img.goldbars.ro/CnPBpEEZbSzShCnFCPjFTZWdiCW5quxfaRhJVBPj.jpg",
+        description: "Aurul (Au) este un metal prețios, moale, lucios, de culoare galbenă, care nu se oxidează în aer sau apă."
+    },
+    "Oxigen": {
+        image: "https://www.shutterstock.com/image-vector/oxygen-molecule-transparent-3d-bubble-260nw-2426140419.jpg",
+        description: "Oxigenul (O) este un gaz incolor, inodor și insipid, esențial pentru respirația majorității organismelor vii."
+    },
+    "HCl": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Hydrochloric_acid_05.jpg",
+        description: "Acidul clorhidric (HCl) este o soluție apoasă a clorurii de hidrogen, un acid tare folosit în industrie și laboratoare."
+    },
+    "NaCl": {
+        image: "https://www.chemicals.co.uk/wp-content/uploads/2021/09/NaCl-written-in-salt-scaled-1.webp",
+        description: "Clorura de sodiu (NaCl), cunoscută ca sare de masă, este un compus ionic esențial pentru viață."
+    },
+    "H₂O": {
+        image: "https://static9.depositphotos.com/1005669/1161/i/450/depositphotos_11613276-stock-photo-water-drop.jpg",
+        description: "Apa (H₂O) este un compus chimic format din doi atomi de hidrogen și un atom de oxigen, esențial pentru viață."
+    },
+    "CH₄": {
+        image: "https://www.laboratuvar.com/images/gaz/ch4-metan.jpg",
+        description: "Metanul (CH₄) este cea mai simplă hidrocarbură, un gaz incolor și inodor, component principal al gazelor naturale."
+    },
+    "CO₂": {
+        image: "https://s45727.pcdn.co/wp-content/uploads/2024/11/Emissions-plane-CO2-Nov-2024.jpg.optimal.jpg",
+        description: "Dioxidul de carbon (CO₂) este un gaz incolor, esențial pentru fotosinteză și un important gaz cu efect de seră."
+    },
+    "NaOH": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/SodiumHydroxide.jpg/800px-SodiumHydroxide.jpg",
+        description: "Hidroxidul de sodiu (NaOH), cunoscut ca sodă caustică, este o bază tare folosită în industrie."
+    },
+    "N": {
+    image: "https://criocenter.ro/wp-content/uploads/2018/08/nitrogen-535x380.jpg",
+    description: "Azotul (N) este un element nemetalic care formează aproximativ 78% din atmosfera terestră și este esențial pentru proteine și ADN."
+},
+ "Pb": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Lead_electrolytic_and_1cm3_cube.jpg",
+        description: "Plumbul (Pb) este un metal greu, moale și toxic, folosit în trecut la baterii, tuburi și materiale de protecție împotriva radiațiilor."
+    },
+    "Mg": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Magnesium_crystals.jpg",
+        description: "Magneziul (Mg) este un metal ușor, reactiv, esențial în biologie și folosit în aliaje datorită rezistenței sale."
+    },
+    "H": {
+    image: "https://www.descopera.ro/wp-content/uploads/2023/05/faza-teoretica-a-hidrogenului_shutterstock_descopera-1.jpg",
+    description: "Hidrogenul (H) este cel mai ușor și mai abundent element din univers, fiind esențial în reacțiile chimice și procesele energetice."
+},
+"Be": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f6/Beryllium_nuggets_2.jpg",
+    description: "Beriliul (Be) este un metal alcalino-pământos ușor, rigid și toxic, folosit în aliaje speciale și componente aeronautice."
+},
 
-        // Baza de date pentru exerciții
+"Fe": {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP9nZaJiu3GO5pxTggP4j9RP0PWgdTaJK_CQ&s",
+    description: "Fierul (Fe) este un metal esențial, folosit pe scară largă în construcții și industrie; stă la baza formării oțelului."
+},
+
+"Na": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Na_%28Sodium%29.jpg/250px-Na_%28Sodium%29.jpg",
+    description: "Sodiul (Na) este un metal alcalin foarte reactiv, care se păstrează în ulei și reacționează violent cu apa."
+},
+
+"Ar": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Argon_discharge_tube.jpg",
+    description: "Argonul (Ar) este un gaz nobil inert, utilizat în iluminat, sudură și ca atmosferă protectoare în laboratoare."
+},
+
+"K": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Potassium-2.jpg",
+    description: "Potasiul (K) este un metal alcalin extrem de reactiv, necesar organismelor pentru funcțiile nervoase și musculare."
+},
+
+"Ca": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/0/09/Calcium_1.jpg",
+    description: "Calciul (Ca) este un metal alcalino-pământos esențial pentru oase, dinți și multe procese biologice."
+},
+
+"Cl": {
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Chlorine_ampoule.jpg",
+    description: "Clorul (Cl) este un nemetal foarte reactiv, sub formă de gaz verde-gălbui, folosit la dezinfectare și în industria chimică."
+},
+
+"F": {
+    image: "https://cdn.prod.www.spiegel.de/images/0c2cf124-0001-0004-0000-000000373041_w1200_r1_fpx45.35_fpy50.jpg",
+    description: "Fluorul (F) este cel mai electronegativ element, un nemetal galben-pal, extrem de reactiv, utilizat în fluoruri și teflon."
+},
+"Cu": {
+    image: "https://hartareciclarii.ro/wp-content/uploads/2018/11/HR-FB-posts-7.png",
+    description: "Cuprul (Cu) este un metal roșiatic excelent conductor de electricitate și căldură, utilizat în cabluri, circuite și aliaje precum bronzul și alama."
+}
+    
+};
+        // Baza de date extinsă pentru exerciții de liceu
         const exerciseDatabase = {
             atomi: [
                 {
@@ -2187,8 +2632,74 @@
                     options: ["6", "7", "8", "14"],
                     correct: 2,
                     explanation: "Carbon-14 are 6 protoni și 8 neutroni (14 - 6 = 8).",
-                    visual: "default"
-                }
+                    
+                },
+                {
+    question: "Care este numărul atomic al elementului Azot?",
+    options: ["5", "6", "7", "8"],
+    correct: 2,
+    explanation: "Azotul are numărul atomic 7, deci 7 protoni.",
+    visual: "N"
+},
+{
+    question: "Ce particule determină masa atomică?",
+    options: ["Protonii", "Electronii", "Neutronii", "Protonii și Neutronii"],
+    correct: 3,
+    explanation: "Masa atomică este suma protonilor și neutronilor."
+},
+{
+    question: "Un atom neutru de sodiu are 11 electroni. Câți protoni are?",
+    options: ["10", "11", "12", "22"],
+    correct: 1,
+    explanation: "Atomul neutru are protoni = electroni."
+},
+{
+    question: "Ce particulă are sarcină electrică negativă?",
+    options: ["Proton", "Neutron", "Electron", "Nucleon"],
+    correct: 2,
+    explanation: "Electronul are sarcină negativă."
+},
+{
+    question: "Ce au în comun izotopii aceluiași element?",
+    options: ["Neutronii", "Protonii", "Nucleonii", "Electronii"],
+    correct: 1,
+    explanation: "Izotopii au același număr atomic (protoni)."
+},
+{
+    question: "Ce particulă se găsește în nucleu și nu are sarcină?",
+    options: ["Proton", "Electron", "Neutron", "Ion"],
+    correct: 2,
+    explanation: "Neutronul este neutru."
+},
+{
+    question: "Ce element are 12 protoni?",
+    options: ["Carbon", "Magneziu", "Aluminiu", "Sodiu"],
+    correct: 1,
+    explanation: "Magneziul are Z = 12.",
+    visual: "Mg"
+},
+{
+    question: "Numărul atomic reprezintă:",
+    options: ["Numărul de neutroni", "Numărul de electroni", "Numărul de masă", "Numărul de protoni"],
+    correct: 3,
+    explanation: "Numărul atomic indică protonii din nucleu."
+},
+{
+    question: "Care este cel mai simplu atom?",
+    options: ["Hidrogen", "Heliu", "Oxigen", "Neon"],
+    correct: 0,
+    explanation: "Hidrogenul are un singur proton.",
+    visual: "H"
+},
+{
+    question: "Ce element are 2 electroni pe stratul exterior?",
+    options: ["Oxigen", "Beriliu", "Neon", "Carbon"],
+    correct: 1,
+    explanation: "Beriliul are configurația 1s²2s².",
+    visual: "Be"
+}
+
+                
             ],
             tabel: [
                 {
@@ -2197,7 +2708,77 @@
                     correct: 1,
                     explanation: "'Au' este simbolul pentru Aur (din latină 'Aurum').",
                     visual: "Au"
-                }
+                },
+                {
+    question: "Simbolul 'Fe' reprezintă:",
+    options: ["Fluor", "Fier", "Fosfor", "Franciu"],
+    correct: 1,
+    explanation: "'Fe' este simbolul pentru Fier.",
+    visual: "Fe"
+},
+{
+    question: "Care dintre următoarele este un gaz nobil?",
+    options: ["Oxigen", "Argon", "Carbon", "Clor"],
+    correct: 1,
+    explanation: "Argonul aparține grupei gazelor nobile.",
+    visual: "Ar"
+},
+{
+    question: "Care element aparține grupei 1?",
+    options: ["Sodiu", "Magneziu", "Cupru", "Argon"],
+    correct: 0,
+    explanation: "Sodiul este metal alcalin.",
+    visual: "Na"
+},
+{
+    question: "Simbolul 'K' reprezintă:",
+    options: ["Krypton", "Potasiu", "Calciu", "Carbon"],
+    correct: 1,
+    explanation: "K este simbolul pentru Potasiu.",
+    visual: "K"
+},
+{
+    question: "Ce element are număr atomic 12?",
+    options: ["Neon", "Magneziu", "Sodiu", "Siliciu"],
+    correct: 1,
+    explanation: "Magneziul are Z = 12.",
+    visual: "Mg"
+},
+{
+    question: "Care dintre următoarele este metal alcalino-pământos?",
+    options: ["Calciu", "Litiu", "Rubidiu", "Sulf"],
+    correct: 0,
+    explanation: "Calciul este alcalino-pământos.",
+    visual: "Ca"
+},
+{
+    question: "Simbolul 'Pb' reprezintă:",
+    options: ["Plumb", "Platina", "Paladiu", "Fosfor"],
+    correct: 0,
+    explanation: "Pb provine din latină — Plumbum.",
+    visual: "Pb"
+},
+{
+    question: "Ce element are numărul atomic 17?",
+    options: ["Neon", "Clor", "Argon", "Sulf"],
+    correct: 1,
+    explanation: "Clorul are Z = 17.",
+    visual: "Cl"
+},
+{
+    question: "Care este cel mai reactiv metal alcalin?",
+    options: ["Litiu", "Sodiu", "Potasiu", "Cesiu"],
+    correct: 3,
+    explanation: "Reactivitatea crește în josul grupei 1."
+},
+{
+    question: "Ce element are configurația 1s² 2s² 2p⁵?",
+    options: ["Fluor", "Oxigen", "Neon", "Bor"],
+    correct: 0,
+    explanation: "Fluorul are 9 electroni.",
+    visual: "F"
+}
+
             ],
             legaturi: [
                 {
@@ -2206,7 +2787,69 @@
                     correct: 1,
                     explanation: "NaCl (clorura de sodiu) este o legătură ionică între un metal (Na) și un nemetal (Cl).",
                     visual: "NaCl"
-                }
+                },
+                {
+    question: "Care dintre următoarele este o legătură covalentă?",
+    options: ["NaCl", "H₂", "KBr", "CaO"],
+    correct: 1,
+    explanation: "H₂ are o legătură covalentă nepolară."
+},
+{
+    question: "Ce tip de legătură există în CO₂?",
+    options: ["Covalentă", "Ionică", "Metalica", "Van der Waals"],
+    correct: 0,
+    explanation: "CO₂ este o moleculă covalentă."
+},
+{
+    question: "În ce substanță se găsește legătura metalică?",
+    options: ["Cupru", "HCl", "CO₂", "NaCl"],
+    correct: 0,
+    explanation: "Cuprul este metal, deci are legături metalice.",
+    visual: "Cu"
+},
+{
+    question: "Ce legături există în CH₄?",
+    options: ["Ionice", "Covalente simple", "Covalente duble", "Metalice"],
+    correct: 1,
+    explanation: "CH₄ are legături covalente simple C–H."
+},
+{
+    question: "Ce moleculă are legătură dublă?",
+    options: ["O₂", "H₂O", "CO₂", "F₂"],
+    correct: 2,
+    explanation: "CO₂ are două legături duble."
+},
+{
+    question: "Ce moleculă conține o legătură triplă?",
+    options: ["NH₃", "HCN", "H₂O", "CH₄"],
+    correct: 1,
+    explanation: "HCN are legătură triplă între C și N."
+},
+{
+    question: "Ce tip de legătură are Na₂O?",
+    options: ["Covalentă", "Ionică", "Metalica", "Polară"],
+    correct: 1,
+    explanation: "Na₂O este compus ionic."
+},
+{
+    question: "Legătura din HCl este:",
+    options: ["Covalentă polară", "Covalentă nepolară", "Ionică", "Metalica"],
+    correct: 0,
+    explanation: "Diferența de electronegativitate → polară."
+},
+{
+    question: "Ce interacțiune apare între moleculele de apă?",
+    options: ["Legături ionice", "Legături de hidrogen", "Metalice", "Van der Waals"],
+    correct: 1,
+    explanation: "Apa formează legături de hidrogen."
+},
+{
+    question: "Care legătură implică transfer de electroni?",
+    options: ["Covalentă", "Ionică", "Metalica", "Dativă"],
+    correct: 1,
+    explanation: "Legătura ionică se formează prin transfer de electroni."
+}
+
             ],
             ecuatii: [
                 {
@@ -2214,8 +2857,69 @@
                     options: ["1", "2", "3", "4"],
                     correct: 1,
                     explanation: "Ecuația echilibrată este: CH₄ + 2O₂ → CO₂ + 2H₂O, deci coeficientul pentru O₂ este 2.",
-                    visual: "default"
-                }
+                    
+                },
+                {
+    question: "Care este coeficientul pentru H₂ în ecuația echilibrată: H₂ + Cl₂ → HCl?",
+    options: ["1", "2", "3", "4"],
+    correct: 1,
+    explanation: "Ecuația corectă este: H₂ + Cl₂ → 2HCl, deci coeficientul pentru HCl este 2."
+},
+{
+    question: "Ce coeficient are O₂ în ecuația: 2Mg + O₂ → 2MgO?",
+    options: ["1", "2", "3", "0.5"],
+    correct: 0,
+    explanation: "Este nevoie de 1 mol de O₂."
+},
+{
+    question: "Care este coeficientul lui Al în ecuația: Al + O₂ → Al₂O₃?",
+    options: ["2", "3", "4", "1"],
+    correct: 2,
+    explanation: "Ecuația echilibrată: 4Al + 3O₂ → 2Al₂O₃."
+},
+{
+    question: "Ce coeficient are CO₂ în reacția: CaCO₃ → CaO + CO₂?",
+    options: ["1", "2", "3", "0"],
+    correct: 0,
+    explanation: "Se formează 1 mol de CO₂ la descompunerea carbonatului."
+},
+{
+    question: "Ce coeficient are H₂O în ecuația echilibrată: 2H₂ + O₂ → ?",
+    options: ["1", "2", "3", "4"],
+    correct: 1,
+    explanation: "Ecuația devine 2H₂ + O₂ → 2H₂O."
+},
+{
+    question: "În neutralizarea: HCl + NaOH → NaCl + H₂O, coeficientul pentru H₂O este:",
+    options: ["1", "2", "0.5", "4"],
+    correct: 0,
+    explanation: "Reacție 1:1:1:1."
+},
+{
+    question: "Ce coeficient are O₂ în arderea metanului: CH₄ + ? → CO₂ + 2H₂O?",
+    options: ["1", "2", "3", "4"],
+    correct: 1,
+    explanation: "Ecuația completă: CH₄ + 2O₂ → CO₂ + 2H₂O."
+},
+{
+    question: "Coeficientul pentru Fe în: Fe + CuSO₄ → FeSO₄ + Cu?",
+    options: ["1", "2", "3", "4"],
+    correct: 0,
+    explanation: "Reacția se echilibrează simplu: toți coeficienții = 1."
+},
+{
+    question: "Care este coeficientul lui NH₃ în ecuația: N₂ + H₂ → NH₃?",
+    options: ["1", "2", "3", "4"],
+    correct: 1,
+    explanation: "Ecuația echilibrată: N₂ + 3H₂ → 2NH₃."
+},
+{
+    question: "Coeficientul lui Zn în reacția: Zn + 2HCl → ZnCl₂ + H₂?",
+    options: ["1", "2", "3", "4"],
+    correct: 0,
+    explanation: "1 mol de Zn reacționează cu 2 moli de HCl."
+}
+
             ],
             reactii: [
                 {
@@ -2223,8 +2927,69 @@
                     options: ["Reacție de combinare", "Reacție de descompunere", "Reacție de substituție", "Reacție de neutralizare"],
                     correct: 0,
                     explanation: "Aceasta este o reacție de combinare, unde două substanțe se unesc pentru a forma o singură substanță nouă.",
-                    visual: "default"
-                }
+                    
+                },
+                {
+    question: "Reacția 2H₂O₂ → 2H₂O + O₂ este:",
+    options: ["De combinare", "De descompunere", "Redox", "Neutralizare"],
+    correct: 1,
+    explanation: "H₂O₂ se descompune în apă și oxigen."
+},
+{
+    question: "Reacția Zn + 2HCl → ZnCl₂ + H₂ este:",
+    options: ["Combinație", "Neutralizare", "Substituție", "Descompunere"],
+    correct: 2,
+    explanation: "Zincul înlocuiește hidrogenul."
+},
+{
+    question: "Reacția CaCO₃ → CaO + CO₂ este o:",
+    options: ["Neutralizare", "De descompunere", "Combinație", "Redox"],
+    correct: 1,
+    explanation: "Carbonatul se descompune termic."
+},
+{
+    question: "Reacția HCl + NaOH → NaCl + H₂O este:",
+    options: ["Neutralizare", "Redox", "Substituție", "Descompunere"],
+    correct: 0,
+    explanation: "Acid + bază → sare + apă."
+},
+{
+    question: "Reacția Fe + S → FeS este:",
+    options: ["Combinație", "Descompunere", "Redox", "Neutralizare"],
+    correct: 0,
+    explanation: "Două substanțe formează un compus."
+},
+{
+    question: "Arderea metanului este reacție:",
+    options: ["Combinare", "Oxidare", "Redox", "Toate de mai sus"],
+    correct: 3,
+    explanation: "Este simultan oxidare și combinare."
+},
+{
+    question: "Reacția CuO + H₂ → Cu + H₂O este:",
+    options: ["Oxidare", "Reducere", "Redox", "Neutralizare"],
+    correct: 2,
+    explanation: "H₂ reduce CuO, H₂ se oxidează."
+},
+{
+    question: "Reacția AgNO₃ + NaCl → AgCl + NaNO₃ este:",
+    options: ["Neutralizare", "Precipitare", "Descompunere", "Redox"],
+    correct: 1,
+    explanation: "AgCl precipită."
+},
+{
+    question: "Reacția 2KClO₃ → 2KCl + 3O₂ este:",
+    options: ["Descompunere", "Combinare", "Neutralizare", "Substituție"],
+    correct: 0,
+    explanation: "Cloratul se descompune termic."
+},
+{
+    question: "Reacția Mg + O₂ → MgO este:",
+    options: ["Combinare", "Descompunere", "Neutralizare", "Precipitare"],
+    correct: 0,
+    explanation: "Metal + oxigen → oxid."
+}
+
             ],
             acizi: [
                 {
@@ -2233,7 +2998,68 @@
                     correct: 1,
                     explanation: "HCl (acidul clorhidric) este un acid tare care se disociază complet în apă.",
                     visual: "HCl"
-                }
+                },
+                {
+    question: "Care este formula acidului sulfuric?",
+    options: ["H₂SO₄", "H₂SO₃", "HNO₃", "HCl"],
+    correct: 0,
+    explanation: "H₂SO₄ este acidul sulfuric."
+},
+{
+    question: "Care dintre următorii este un acid slab?",
+    options: ["HCl", "HNO₃", "CH₃COOH", "HBr"],
+    correct: 2,
+    explanation: "Acidul acetic este slab."
+},
+{
+    question: "Ce este NaOH?",
+    options: ["Acid tare", "Acid slab", "Bază tare", "Sare"],
+    correct: 2,
+    explanation: "Sodă caustică = bază tare."
+},
+{
+    question: "Ce pH are o soluție acidă?",
+    options: ["< 7", "= 7", "> 7", "Depinde"],
+    correct: 0,
+    explanation: "Acid = pH sub 7."
+},
+{
+    question: "Ce se formează la reacția acid + bază?",
+    options: ["Apă și sare", "Gaz", "Metal", "Oxigen"],
+    correct: 0,
+    explanation: "Neutralizare clasică."
+},
+{
+    question: "Care este formula acidului azotic?",
+    options: ["HNO₂", "HNO₃", "H₂SO₄", "H₃PO₄"],
+    correct: 1,
+    explanation: "HNO₃ = acid azotic."
+},
+{
+    question: "Ionul caracteristic bazelor este:",
+    options: ["H⁺", "OH⁻", "Cl⁻", "NO₃⁻"],
+    correct: 1,
+    explanation: "Bazele produc OH⁻."
+},
+{
+    question: "Acidul carbonic are formula:",
+    options: ["H₂CO₃", "H₂CO₂", "HCOOH", "H₃CO₃"],
+    correct: 0,
+    explanation: "H₂CO₃ este instabil."
+},
+{
+    question: "NH₃ în apă se comportă ca:",
+    options: ["Acid tare", "Bază slabă", "Bază tare", "Acid slab"],
+    correct: 1,
+    explanation: "Amoniacul este bază slabă."
+},
+{
+    question: "Acidul clorhidric este:",
+    options: ["Slab", "Tare", "Neutral", "Dependent de temperatură"],
+    correct: 1,
+    explanation: "HCl se disociază complet."
+}
+
             ],
             redox: [
                 {
@@ -2241,8 +3067,69 @@
                     options: ["Zn", "Cu", "Ambele", "Niciunul"],
                     correct: 1,
                     explanation: "Cu²⁺ se reduce la Cu, primind 2 electroni de la Zn care se oxidează.",
-                    visual: "default"
-                }
+                    
+                },
+                {
+    question: "Cine se oxidează în reacția: Zn + Cu²⁺ → Zn²⁺ + Cu?",
+    options: ["Zn", "Cu²⁺", "Cu", "Ambele"],
+    correct: 0,
+    explanation: "Zn pierde electroni."
+},
+{
+    question: "Oxidarea înseamnă:",
+    options: ["Pierdere de electroni", "Câștig de electroni", "Formare de protoni", "Descompunere"],
+    correct: 0,
+    explanation: "Oxidare = pierdere de e⁻."
+},
+{
+    question: "Cine se reduce în reacția: Fe³⁺ + 3e⁻ → Fe?",
+    options: ["Fe³⁺", "Fe", "Electronii", "Nimeni"],
+    correct: 0,
+    explanation: "Fe³⁺ capătă electroni."
+},
+{
+    question: "Ce specie este agent oxidant?",
+    options: ["Cea care se oxidează", "Cea care se reduce", "Cea neutră", "Cea care pierde protoni"],
+    correct: 1,
+    explanation: "Oxidantul se reduce."
+},
+{
+    question: "În reacția 2Mg + O₂ → 2MgO, cine este agent reducător?",
+    options: ["Mg", "O₂", "MgO", "Nimeni"],
+    correct: 0,
+    explanation: "Mg se oxidează → agent reducător."
+},
+{
+    question: "Ce se întâmplă cu numărul de oxidare la oxidare?",
+    options: ["Scade", "Crește", "Rămâne constant", "Devine zero"],
+    correct: 1,
+    explanation: "Oxidare = creșterea numărului de oxidare."
+},
+{
+    question: "În reacția: 2Fe²⁺ → 2Fe³⁺ + 2e⁻, Fe²⁺ este:",
+    options: ["Reducător", "Oxidant", "Neutral", "Acid"],
+    correct: 0,
+    explanation: "Pierde electroni → reducător."
+},
+{
+    question: "Ce specie se reduce în: 2H₂ + O₂ → 2H₂O?",
+    options: ["H₂", "O₂", "H₂O", "Niciuna"],
+    correct: 1,
+    explanation: "O₂ capătă electroni."
+},
+{
+    question: "Cine este oxidantul în reacția: CuO + H₂ → Cu + H₂O?",
+    options: ["CuO", "H₂", "Cu", "H₂O"],
+    correct: 0,
+    explanation: "CuO acceptă electroni."
+},
+{
+    question: "Ce se întâmplă cu o specie când se reduce?",
+    options: ["Pierde electroni", "Câștigă electroni", "Reacționează cu apă", "Devine gaz"],
+    correct: 1,
+    explanation: "Reducere = câștig de e⁻."
+}
+
             ],
             organica: [
                 {
@@ -2251,7 +3138,68 @@
                     correct: 1,
                     explanation: "Etanul (C₂H₆) este o hidrocarbură saturată, având doar legături simple.",
                     visual: "CH₄"
-                }
+                },
+                {
+    question: "Metanul aparține clasei:",
+    options: ["Alcani", "Alchene", "Alchine", "Arene"],
+    correct: 0,
+    explanation: "CH₄ este alcan."
+},
+{
+    question: "Formula etenei este:",
+    options: ["C₂H₆", "C₂H₄", "C₂H₂", "C₆H₆"],
+    correct: 1,
+    explanation: "Etena este alchenă cu legătură dublă."
+},
+{
+    question: "Benzenul este o:",
+    options: ["Alcană", "Alchenă", "Arenă", "Alchină"],
+    correct: 2,
+    explanation: "Benzenul este arenă aromatică."
+},
+{
+    question: "Ce grupă funcțională are alcoolul?",
+    options: ["–CHO", "–OH", "–COOH", "–NH₂"],
+    correct: 1,
+    explanation: "Alcoolii au grupă hidroxil."
+},
+{
+    question: "Acidul etanoic este același cu:",
+    options: ["Acidul acetic", "Metanol", "Etanol", "Acetonă"],
+    correct: 0,
+    explanation: "CH₃COOH = acid acetic."
+},
+{
+    question: "Ce hidrocarbură are legătură triplă?",
+    options: ["Etan", "Etenă", "Etină", "Metan"],
+    correct: 2,
+    explanation: "Etina are C≡C."
+},
+{
+    question: "Ce compus este C₂H₆?",
+    options: ["Alchenă", "Alcan", "Alchină", "Arenă"],
+    correct: 1,
+    explanation: "Etanul este alcan."
+},
+{
+    question: "Ce compus are formula C₆H₆?",
+    options: ["Toluene", "Benzen", "Ciclohexan", "Hexan"],
+    correct: 1,
+    explanation: "C₆H₆ = benzen aromatic."
+},
+{
+    question: "Ce este izomeria?",
+    options: ["Schimbarea stării", "Compuși cu aceeași formulă moleculară dar structură diferită", "Reacție chimică", "Formare de radicali"],
+    correct: 1,
+    explanation: "Izomerii au formule identice dar structuri diferite."
+},
+{
+    question: "Ce compus are grupă –COOH?",
+    options: ["Alcool", "Aldehidă", "Acid carboxilic", "Amină"],
+    correct: 2,
+    explanation: "Acizii carboxilici au –COOH."
+}
+
             ],
             solutii: [
                 {
@@ -2259,8 +3207,69 @@
                     options: ["O soluție care conține mai mult dizolvat decât poate dizolva", "O soluție care conține cantitatea maximă de dizolvat", "O soluție care nu conține dizolvat", "O soluție care conține doi dizolvanți"],
                     correct: 1,
                     explanation: "O soluție saturată conține cantitatea maximă de dizolvat care se poate dizolva la o anumită temperatură.",
-                    visual: "default"
-                }
+                    
+                },
+                {
+    question: "Ce este o soluție diluată?",
+    options: ["Puțin dizolvat", "Mult solut", "Aproape saturată", "Nu conține apă"],
+    correct: 0,
+    explanation: "Concentrație mică de solut."
+},
+{
+    question: "Ce reprezintă concentrația procentuală?",
+    options: ["Raportul solut/solvent", "Masa solutului în 100g soluție", "Volumul solventului", "Numărul de moli"],
+    correct: 1,
+    explanation: "Concentrația % = g solut / 100g soluție."
+},
+{
+    question: "Ce este soluția suprasaturată?",
+    options: ["Are solut minim", "Are solut maxim", "Conține mai mult solut decât poate dizolva", "Nu are solvent"],
+    correct: 2,
+    explanation: "Instabilă, cu exces de solut."
+},
+{
+    question: "Ce mărime exprimă molaritatea?",
+    options: ["Moli solut / litru soluție", "Grame / litru", "Litri / mol", "Masa solventului"],
+    correct: 0,
+    explanation: "M = moli per litru."
+},
+{
+    question: "Ce se întâmplă cu solubilitatea solidelor la creșterea temperaturii?",
+    options: ["Scade", "Crește", "Rămâne constantă", "Devine nulă"],
+    correct: 1,
+    explanation: "Majoritatea solidelor devin mai solubile la cald."
+},
+{
+    question: "Ce se întâmplă cu solubilitatea gazelor la încălzire?",
+    options: ["Crește", "Scade", "Devine constantă", "Nu depinde"],
+    correct: 1,
+    explanation: "Gazele devin mai solubile la rece."
+},
+{
+    question: "Apa este:",
+    options: ["Solvent universal", "Solut", "Sare", "Acid"],
+    correct: 0,
+    explanation: "Dizolvă multe substanțe."
+},
+{
+    question: "Ce soluție are cea mai mare concentrație?",
+    options: ["5%", "10%", "20%", "1%"],
+    correct: 2,
+    explanation: "20% > 10% > 5% > 1%."
+},
+{
+    question: "Care soluție conține cei mai mulți ioni?",
+    options: ["CH₃OH", "HCl", "NaOH", "H₂O"],
+    correct: 2,
+    explanation: "NaOH este bază tare, se disociază complet."
+},
+{
+    question: "Dizolvarea NaCl în apă este un proces:",
+    options: ["Endoterm", "Exoterm", "Nuclear", "Redox"],
+    correct: 0,
+    explanation: "Temperatura scade ușor la dizolvare."
+}
+
             ]
         };
 
@@ -2284,7 +3293,7 @@
 
         // Verifică dacă utilizatorul este autentificat la încărcarea paginii
         document.addEventListener('DOMContentLoaded', function() {
-            const user = JSON.parse(localStorage.getItem('chemAIUser'));
+            const user = JSON.parse(localStorage.getItem('eduAIUser'));
             if (user) {
                 showUserInfo(user);
                 initializeUserProgress(user);
@@ -2298,11 +3307,14 @@
             
             // Actualizează vizibilitatea cardurilor protejate
             updateProtectedCards();
+            
+            // Actualizează scorurile BAC
+            updateBACScores();
         });
 
         // Funcție pentru actualizarea cardurilor protejate
         function updateProtectedCards() {
-            const user = JSON.parse(localStorage.getItem('chemAIUser'));
+            const user = JSON.parse(localStorage.getItem('eduAIUser'));
             document.querySelectorAll('.protected-card').forEach(card => {
                 if (user) {
                     card.style.display = 'block';
@@ -2310,6 +3322,19 @@
                     card.style.display = 'none';
                 }
             });
+        }
+
+        // Funcție pentru actualizarea scorurilor BAC
+        function updateBACScores() {
+            const bacScores = JSON.parse(localStorage.getItem('eduAIBACScores')) || {
+                'bac2023': 0,
+                'bac2022': 0,
+                'bac2021': 0
+            };
+            
+            document.getElementById('bac2023Score').textContent = `${bacScores.bac2023}%`;
+            document.getElementById('bac2022Score').textContent = `${bacScores.bac2022}%`;
+            document.getElementById('bac2021Score').textContent = `${bacScores.bac2021}%`;
         }
 
         // Funcție pentru afișarea informațiilor utilizatorului
@@ -2330,7 +3355,7 @@
 
         // Funcție pentru inițializarea progresului utilizatorului
         function initializeUserProgress(user) {
-            let userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            let userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
             
             if (!userProgress || userProgress.userId !== user.id) {
                 userProgress = {
@@ -2350,7 +3375,7 @@
                         "Folosește chatbot-ul pentru a pune întrebări despre concepte neclare"
                     ]
                 };
-                localStorage.setItem('chemAIUserProgress', JSON.stringify(userProgress));
+                localStorage.setItem('eduAIUserProgress', JSON.stringify(userProgress));
             }
             
             updateProgressUI(userProgress);
@@ -2435,7 +3460,7 @@
 
         // Eveniment pentru deconectare
         logoutBtn.addEventListener('click', function() {
-            localStorage.removeItem('chemAIUser');
+            localStorage.removeItem('eduAIUser');
             hideUserInfo();
             showPage('dashboard-page');
             alert('Te-ai deconectat cu succes!');
@@ -2447,11 +3472,11 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            const users = JSON.parse(localStorage.getItem('chemAIUsers')) || [];
+            const users = JSON.parse(localStorage.getItem('eduAIUsers')) || [];
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                localStorage.setItem('chemAIUser', JSON.stringify(user));
+                localStorage.setItem('eduAIUser', JSON.stringify(user));
                 showUserInfo(user);
                 initializeUserProgress(user);
                 loginModal.style.display = 'none';
@@ -2470,7 +3495,7 @@
             const password = document.getElementById('signupPassword').value;
             const userClass = document.getElementById('signupClass').value;
             
-            const users = JSON.parse(localStorage.getItem('chemAIUsers')) || [];
+            const users = JSON.parse(localStorage.getItem('eduAIUsers')) || [];
             const existingUser = users.find(u => u.email === email);
             
             if (existingUser) {
@@ -2488,8 +3513,8 @@
             };
             
             users.push(newUser);
-            localStorage.setItem('chemAIUsers', JSON.stringify(users));
-            localStorage.setItem('chemAIUser', JSON.stringify(newUser));
+            localStorage.setItem('eduAIUsers', JSON.stringify(users));
+            localStorage.setItem('eduAIUser', JSON.stringify(newUser));
             
             showUserInfo(newUser);
             initializeUserProgress(newUser);
@@ -2502,7 +3527,7 @@
         document.querySelectorAll('.dashboard-card').forEach(card => {
             card.addEventListener('click', function() {
                 const pageId = this.getAttribute('data-page');
-                const user = JSON.parse(localStorage.getItem('chemAIUser'));
+                const user = JSON.parse(localStorage.getItem('eduAIUser'));
                 
                 if (this.classList.contains('protected-card') && !user) {
                     loginModal.style.display = 'flex';
@@ -2529,14 +3554,15 @@
                     'progres': 'progres-page',
                     'exercitii': 'exercitii-page',
                     'test-initial': 'test-page',
+                    'bacalaureat': 'bacalaureat-page',
                     'testimoniale': 'testimoniale-page',
                     'contact': 'contact-page',
- 'modele-3d': 'modele-3d-page'
+                    'modele-3d': 'modele-3d-page'
                 };
                 
                 if (pageMap[target]) {
-                    const user = JSON.parse(localStorage.getItem('chemAIUser'));
-                    const isProtected = target === 'progres' || target === 'exercitii' || target === 'test-initial';
+                    const user = JSON.parse(localStorage.getItem('eduAIUser'));
+                    const isProtected = target === 'progres' || target === 'exercitii' || target === 'test-initial' || target === 'bacalaureat';
                     
                     if (isProtected && !user) {
                         loginModal.style.display = 'flex';
@@ -2552,9 +3578,9 @@
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const pageId = this.getAttribute('data-page');
-                const user = JSON.parse(localStorage.getItem('chemAIUser'));
+                const user = JSON.parse(localStorage.getItem('eduAIUser'));
                 
-                if (pageId.includes('progres') || pageId.includes('exercitii') || pageId.includes('test')) {
+                if (pageId.includes('progres') || pageId.includes('exercitii') || pageId.includes('test') || pageId.includes('bacalaureat')) {
                     if (!user) {
                         loginModal.style.display = 'flex';
                         return;
@@ -2564,11 +3590,6 @@
                 showPage(pageId);
             });
         });
-
-        // Restul funcționalităților rămân la fel...
-        // [Toate celelalte funcții rămân neschimbate - generateNewExercise, checkExerciseAnswer, etc.]
-
-        // Pentru spațiu, voi include doar funcțiile esențiale modificate:
 
         // Eveniment pentru butonul de generare exerciții
         generateExerciseBtn.addEventListener('click', function() {
@@ -2582,52 +3603,52 @@
 
         // Funcție pentru generarea unui nou exercițiu
         function generateNewExercise() {
-            const topic = topicSelect.value;
-            const difficulty = difficultySelect.value;
-            const type = exerciseType.value;
-            
-            let availableExercises = [];
-            if (topic === 'all') {
-                Object.values(exerciseDatabase).forEach(exercises => {
-                    availableExercises = availableExercises.concat(exercises);
-                });
-            } else {
-                availableExercises = exerciseDatabase[topic] || [];
-            }
-            
-            if (availableExercises.length > 0) {
-                const randomIndex = Math.floor(Math.random() * availableExercises.length);
-                const exercise = availableExercises[randomIndex];
-                
-                exerciseQuestion.textContent = exercise.question;
-                
-                exerciseOptions.innerHTML = '';
-                exercise.options.forEach((option, index) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'exercise-option';
-                    optionElement.textContent = option;
-                    optionElement.setAttribute('data-correct', index === exercise.correct ? 'true' : 'false');
-                    optionElement.addEventListener('click', function() {
-                        document.querySelectorAll('.exercise-option').forEach(opt => {
-                            opt.style.backgroundColor = '';
-                            opt.style.borderColor = '#e9ecef';
-                        });
-                        
-                        this.style.backgroundColor = 'rgba(76, 181, 174, 0.1)';
-                        this.style.borderColor = 'var(--accent)';
-                    });
-                    exerciseOptions.appendChild(optionElement);
+    const topic = topicSelect.value;
+    const difficulty = difficultySelect.value;
+    const type = exerciseType.value;
+    
+    let availableExercises = [];
+    if (topic === 'all') {
+        Object.values(exerciseDatabase).forEach(exercises => {
+            availableExercises = availableExercises.concat(exercises);
+        });
+    } else {
+        availableExercises = exerciseDatabase[topic] || [];
+    }
+    
+    if (availableExercises.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availableExercises.length);
+        const exercise = availableExercises[randomIndex];
+        
+        exerciseQuestion.textContent = exercise.question;
+        
+        exerciseOptions.innerHTML = '';
+        exercise.options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'exercise-option';
+            optionElement.textContent = option;
+            optionElement.setAttribute('data-correct', index === exercise.correct ? 'true' : 'false');
+            optionElement.addEventListener('click', function() {
+                document.querySelectorAll('.exercise-option').forEach(opt => {
+                    opt.style.backgroundColor = '';
+                    opt.style.borderColor = '#e9ecef';
                 });
                 
-                exerciseFeedback.style.display = 'none';
-                visualRepresentation.style.display = 'none';
-                
-                generatedExercise.style.display = 'block';
-                generatedExercise.currentExercise = exercise;
-            } else {
-                alert('Nu există exerciții disponibile pentru acest topic. Încearcă alt topic.');
-            }
-        }
+                this.style.backgroundColor = 'rgba(76, 181, 174, 0.1)';
+                this.style.borderColor = 'var(--accent)';
+            });
+            exerciseOptions.appendChild(optionElement);
+        });
+        
+        exerciseFeedback.style.display = 'none';
+        visualRepresentation.style.display = 'none';
+        
+        generatedExercise.style.display = 'block';
+        generatedExercise.currentExercise = exercise;
+    } else {
+        alert('Nu există exerciții disponibile pentru acest topic. Încearcă alt topic.');
+    }
+}
 
         // Funcție pentru verificarea răspunsului la exercițiu
         function checkExerciseAnswer() {
@@ -2653,7 +3674,7 @@
                 visualRepresentation.style.display = 'none';
             }
             
-            const user = JSON.parse(localStorage.getItem('chemAIUser'));
+            const user = JSON.parse(localStorage.getItem('eduAIUser'));
             if (user) {
                 updateUserProgress(isCorrect);
             }
@@ -2673,7 +3694,7 @@
 
         // Funcție pentru actualizarea progresului utilizatorului
         function updateUserProgress(isCorrect) {
-            let userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            let userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
             
             if (userProgress) {
                 userProgress.exercisesCompleted += 1;
@@ -2698,19 +3719,16 @@
                     }
                 }
                 
-                localStorage.setItem('chemAIUserProgress', JSON.stringify(userProgress));
+                localStorage.setItem('eduAIUserProgress', JSON.stringify(userProgress));
                 updateProgressUI(userProgress);
             }
         }
-
-        // Funcții pentru test rămân la fel...
-        // [Restul codului pentru test, chatbot, etc. rămâne neschimbat]
 
         // Formular newsletter
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
-            alert(`Mulțumim pentru abonare, ${email}! Vei primi noutățile despre ChemAI în scurt timp.`);
+            alert(`Mulțumim pentru abonare, ${email}! Vei primi noutățile despre EduAI în scurt timp.`);
             this.reset();
         });
 
@@ -2825,7 +3843,7 @@
             feedback.style.display = 'block';
         }
 
-        // Funcții pentru test (rămân la fel ca în codul original)
+        // Funcții pentru test
         function initializeTest() {
             testState.questions = [];
             testState.categoryScores = {};
@@ -3028,7 +4046,7 @@
         }
 
         function updateUserProgressAfterTest(score, categoryScores) {
-            let userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            let userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
             
             if (userProgress) {
                 userProgress.averageScore = score;
@@ -3075,7 +4093,7 @@
                 
                 userProgress.recommendations = recommendations;
                 
-                localStorage.setItem('chemAIUserProgress', JSON.stringify(userProgress));
+                localStorage.setItem('eduAIUserProgress', JSON.stringify(userProgress));
                 updateProgressUI(userProgress);
             }
         }
@@ -3084,7 +4102,7 @@
         startExercisesBtn.addEventListener('click', function() {
             showPage('exercitii-page');
             
-            const userProgress = JSON.parse(localStorage.getItem('chemAIUserProgress'));
+            const userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
             if (userProgress && userProgress.weakAreas && userProgress.weakAreas.length > 0) {
                 const firstWeakArea = userProgress.weakAreas[0].category;
                 topicSelect.value = firstWeakArea;
@@ -3095,81 +4113,339 @@
             }
         });
 
-        // FUNCȚII NOI PENTRU MODELE 3D
-        // FUNCȚII NOI PENTRU MODELE 3D
-// FUNCȚII NOI PENTRU MODELE 3D
-function openModel(type) {
-    const modelContainer = document.getElementById('model-container');
-    const modelIframe = document.getElementById('model-iframe');
-    const modelTitle = document.getElementById('model-title');
-    
-    // Ascunde iframe-ul inițial și arată un loader
-    modelIframe.style.display = 'none';
-    
-    // Adaugă un loader temporar
-    let loader = document.getElementById('model-loader');
-    if (!loader) {
-        loader = document.createElement('div');
-        loader.id = 'model-loader';
-        loader.innerHTML = `
-            <div style="text-align: center; padding: 3rem;">
-                <div class="dashboard-icon"><i class="fas fa-spinner fa-spin"></i></div>
-                <h3>Se încarcă modelul 3D...</h3>
-                <p>Vă rugăm să așteptați</p>
-            </div>
-        `;
-        modelContainer.appendChild(loader);
-    }
-    loader.style.display = 'block';
-    
-    if (type === 'tabel-periodic') {
-        modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/sistemul-periodic-al-elementelor-tabelul-lui-mendeleev.html';
-        modelTitle.textContent = 'Tabelul Periodic 3D';
-    } else if (type === 'compusi-organici') {
-        modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/index.html';
-        modelTitle.textContent = 'Compuși Organici 3D';
-    }
-    
-    modelContainer.style.display = 'block';
-    
-    // Când iframe-ul s-a încărcat, ascunde loader-ul și arată iframe-ul
-    modelIframe.onload = function() {
-        loader.style.display = 'none';
-        modelIframe.style.display = 'block';
-        
-        // Scroll la model după ce s-a încărcat complet
-        setTimeout(() => {
-            modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 500);
-    };
-    
-    // Fallback: dacă iframe-ul nu se încarcă în 5 secunde, tot arată conținutul
-    setTimeout(() => {
-        loader.style.display = 'none';
-        modelIframe.style.display = 'block';
-        modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 5000);
-}
+        // FUNCȚII PENTRU MODELE 3D
+        function openModel(type) {
+            const modelContainer = document.getElementById('model-container');
+            const modelIframe = document.getElementById('model-iframe');
+            const modelTitle = document.getElementById('model-title');
+            const modelLoader = document.getElementById('model-loader');
+            
+            // Afișează loader-ul și ascunde iframe-ul
+            modelLoader.style.display = 'block';
+            modelIframe.style.display = 'none';
+            
+            if (type === 'tabel-periodic') {
+                modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/sistemul-periodic-al-elementelor-tabelul-lui-mendeleev.html';
+                modelTitle.textContent = 'Tabelul Periodic 3D';
+            } else if (type === 'compusi-organici') {
+                modelIframe.src = 'https://www.evaluareinteractiva.ro/resurse-educationale/chimie/index.html';
+                modelTitle.textContent = 'Compuși Organici 3D';
+            }
+            
+            modelContainer.style.display = 'block';
+            
+            // Când iframe-ul s-a încărcat, ascunde loader-ul și arată iframe-ul
+            modelIframe.onload = function() {
+                modelLoader.style.display = 'none';
+                modelIframe.style.display = 'block';
+                
+                // Scroll la model după ce s-a încărcat complet
+                setTimeout(() => {
+                    modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 500);
+            };
+            
+            // Fallback: dacă iframe-ul nu se încarcă în 5 secunde, tot arată conținutul
+            setTimeout(() => {
+                modelLoader.style.display = 'none';
+                modelIframe.style.display = 'block';
+                modelContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 5000);
+        }
 
-function closeModel() {
-    const modelContainer = document.getElementById('model-container');
-    const modelIframe = document.getElementById('model-iframe');
-    
-    modelContainer.style.display = 'none';
-    modelIframe.src = '';
-    
-    // Ascunde loader-ul pentru data viitoare
-    const loader = document.getElementById('model-loader');
-    if (loader) {
-        loader.style.display = 'none';
-    }
-    modelIframe.style.display = 'none';
-    
-    // Scroll înapoi la carduri
-    setTimeout(() => {
-        document.querySelector('.dashboard-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
-}
+        function closeModel() {
+            const modelContainer = document.getElementById('model-container');
+            const modelIframe = document.getElementById('model-iframe');
+            const modelLoader = document.getElementById('model-loader');
+            
+            modelContainer.style.display = 'none';
+            modelIframe.src = '';
+            
+            // Resetează loader-ul pentru data viitoare
+            modelLoader.style.display = 'block';
+            modelIframe.style.display = 'none';
+            
+            // Scroll înapoi la carduri
+            setTimeout(() => {
+                document.querySelector('.dashboard-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Funcție pentru încărcarea subiectelor BAC
+        function loadBacSubject(subjectType) {
+            const container = document.getElementById('bac-subject-container');
+            container.innerHTML = '';
+            
+            let subjectContent = '';
+            let subjectTitle = '';
+            
+            switch(subjectType) {
+                case 'anorganica-2024-var3':
+                    subjectTitle = 'Examenul național de bacalaureat 2024 - Chimie anorganică - Varianta 3';
+                    subjectContent = `
+                        <div class="bac-subject-content">
+                            <div class="bac-header">
+                                <h2 class="bac-title">Examenul național de bacalaureat 2024</h2>
+                                <p class="bac-subtitle">Proba E. d) - Chimie anorganică</p>
+                                <p class="bac-subtitle">Varianta 3</p>
+                            </div>
+                            
+                            <div class="bac-instructions">
+                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
+                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
+                            </div>
+                            
+                            <h3>SUBIECTUL I (40 de puncte)</h3>
+                            <h4>Subiectul A</h4>
+                            <p>Itemii de la 1 la 10 se referă la compuși anorganici, ale căror formule chimice notate cu litere de la (A) la (F), sunt prezentate mai jos:</p>
+                            <p>(A) HCN<br>(B) NaOH<br>(C) HCl<br>(D) N₂<br>(E) CuSO₄<br>(F) H₂O</p>
+                            <p>Pentru fiecare item, notaţi pe foaia de examen numărul de ordine al itemului însoţit de litera corespunzătoare răspunsului corect. Fiecare item are un singur răspuns corect.</p>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">1. Numărul electronilor neparticipați la legătura chimică din molecula compusului (D) este:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. 2</div>
+                                    <div class="bac-option">b. 3</div>
+                                    <div class="bac-option">c. 4</div>
+                                    <div class="bac-option">d. 6</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: c. 4</strong></p>
+                                    <p>Explicație: În molecula de N₂ (azot), fiecare atom de azot are 5 electroni de valență. Cei 3 electroni participă la formarea legăturii triple, iar cei 2 rămași formează o pereche de electroni neparticipanți. În total, molecula are 4 electroni neparticipanți.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">2. Atomul elementului chimic comun din compoziția substanțelor (E) și (F) are:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. 4 electroni de valență</div>
+                                    <div class="bac-option">b. 4 electroni pe ultimul strat</div>
+                                    <div class="bac-option">c. 2 orbitali monoelectronici</div>
+                                    <div class="bac-option">d. 2 orbitali dielectronici</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: a. 4 electroni de valență</strong></p>
+                                    <p>Explicație: Elementul comun este oxigenul (O), care are numărul atomic 8 și configurația electronică 1s² 2s² 2p⁴, deci 6 electroni de valență. Răspunsul corect se referă la proprietățile atomului de oxigen.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Adaugă mai multe întrebări aici -->
+                            
+                            <div style="margin-top: 2rem; text-align: center;">
+                                <button class="btn" onclick="startBacTest('anorganica-2024-var3')">
+                                    <i class="fas fa-play"></i>
+                                    Începe Testul Complet
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'organica-2024-var3':
+                    subjectTitle = 'Examenul național de bacalaureat 2024 - Chimie organică - Varianta 3';
+                    subjectContent = `
+                        <div class="bac-subject-content">
+                            <div class="bac-header">
+                                <h2 class="bac-title">Examenul național de bacalaureat 2024</h2>
+                                <p class="bac-subtitle">Proba E. d) - Chimie organică</p>
+                                <p class="bac-subtitle">Varianta 3</p>
+                            </div>
+                            
+                            <div class="bac-instructions">
+                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
+                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
+                            </div>
+                            
+                            <h3>SUBIECTUL I (40 de puncte)</h3>
+                            <h4>Subiectul A</h4>
+                            <p>Itemii de la 1 la 10 se referă la compuși organici ale căror formule de structură, notate cu litere de la (A) la (F), sunt prezentate în subiect.</p>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">1. Numărul compușilor care conțin în moleculă un nucleu benzenic este egal cu:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. 1</div>
+                                    <div class="bac-option">b. 2</div>
+                                    <div class="bac-option">c. 3</div>
+                                    <div class="bac-option">d. 4</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: c. 3</strong></p>
+                                    <p>Explicație: Compușii cu nucleu benzenic sunt: acidul benzoic, nitrobenzenul și fenolul.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">2. Au în moleculă un singur atom de carbon secundar:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. (A) și (B)</div>
+                                    <div class="bac-option">b. (B) și (C)</div>
+                                    <div class="bac-option">c. (C) și (D)</div>
+                                    <div class="bac-option">d. (D) și (E)</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: b. (B) și (C)</strong></p>
+                                    <p>Explicație: Atomii de carbon secundari sunt cei legați de doi atomi de carbon. Compușii (B) și (C) au fiecare câte un singur atom de carbon secundar.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Adaugă mai multe întrebări aici -->
+                            
+                            <div style="margin-top: 2rem; text-align: center;">
+                                <button class="btn" onclick="startBacTest('organica-2024-var3')">
+                                    <i class="fas fa-play"></i>
+                                    Începe Testul Complet
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'organica-2025-var1':
+                    subjectTitle = 'Examenul național de bacalaureat 2025 - Chimie organică - Varianta 1';
+                    subjectContent = `
+                        <div class="bac-subject-content">
+                            <div class="bac-header">
+                                <h2 class="bac-title">Examenul național de bacalaureat 2025</h2>
+                                <p class="bac-subtitle">Proba E. d) - Chimie organică</p>
+                                <p class="bac-subtitle">Varianta 1</p>
+                            </div>
+                            
+                            <div class="bac-instructions">
+                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
+                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
+                            </div>
+                            
+                            <h3>SUBIECTUL I (40 de puncte)</h3>
+                            <h4>Subiectul A</h4>
+                            <p>Itemii de la 1 la 10 se referă la compuși organici ale căror formule de structură, notate cu litere de la (A) la (F), sunt prezentate în subiect.</p>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">1. Compusul organic cu cele mai puține elemente organogene în compoziție este:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. (A)</div>
+                                    <div class="bac-option">b. (C)</div>
+                                    <div class="bac-option">c. (D)</div>
+                                    <div class="bac-option">d. (F)</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: a. (A)</strong></p>
+                                    <p>Explicație: Compusul (A) conține doar carbon, hidrogen și oxigen, în timp ce celelalte compuși conțin și alte elemente organogene.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bac-question">
+                                <div class="bac-question-title">2. Au în moleculă același număr de atomi:</div>
+                                <div class="bac-options">
+                                    <div class="bac-option">a. (A), (B) și (C)</div>
+                                    <div class="bac-option">b. (A), (C) și (D)</div>
+                                    <div class="bac-option">c. (B), (D) și (E)</div>
+                                    <div class="bac-option">d. (B), (D) și (F)</div>
+                                </div>
+                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
+                                <div class="bac-answer">
+                                    <p><strong>Răspuns corect: b. (A), (C) și (D)</strong></p>
+                                    <p>Explicație: Compușii (A), (C) și (D) au același număr de atomi în moleculă.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Adaugă mai multe întrebări aici -->
+                            
+                            <div style="margin-top: 2rem; text-align: center;">
+                                <button class="btn" onclick="startBacTest('organica-2025-var1')">
+                                    <i class="fas fa-play"></i>
+                                    Începe Testul Complet
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    subjectContent = '<p>Subiectul selectat nu este disponibil momentan.</p>';
+            }
+            
+            container.innerHTML = subjectContent;
+            
+            // Scroll la subiect
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Funcție pentru afișarea/ascunderea răspunsurilor
+        function toggleAnswer(button) {
+            const answer = button.nextElementSibling;
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                button.textContent = 'Arată răspunsul';
+            } else {
+                answer.classList.add('show');
+                button.textContent = 'Ascunde răspunsul';
+            }
+        }
+
+        // Funcție pentru începerea testului BAC
+        function startBacTest(testType) {
+            alert(`Testul ${testType} a început! Această funcționalitate va fi implementată complet în versiunea finală.`);
+            // Aici s-ar putea implementa logica completă pentru testul BAC
+        }
+
+        // Sistem de realizări pentru liceeni
+        class AchievementSystem {
+            constructor() {
+                this.achievements = {
+                    'atom-master': { unlocked: false, progress: 0, target: 10 },
+                    'reaction-pro': { unlocked: false, progress: 0, target: 20 },
+                    'bac-ready': { unlocked: false, progress: 0, target: 5 }
+                };
+            }
+            
+            updateProgress(achievementId, increment = 1) {
+                if (this.achievements[achievementId]) {
+                    this.achievements[achievementId].progress += increment;
+                    
+                    if (this.achievements[achievementId].progress >= this.achievements[achievementId].target) {
+                        this.unlockAchievement(achievementId);
+                    }
+                    
+                    this.saveProgress();
+                }
+            }
+            
+            unlockAchievement(achievementId) {
+                this.achievements[achievementId].unlocked = true;
+                this.showAchievementNotification(achievementId);
+            }
+            
+            showAchievementNotification(achievementId) {
+                const achievementNames = {
+                    'atom-master': 'Maestrul Atomilor',
+                    'reaction-pro': 'Expert în Reacții', 
+                    'bac-ready': 'Pregătit pentru BAC'
+                };
+                
+                // Poți adăuga o notificare frumoasă aici
+                console.log(`Felicitări! Ai deblocat realizarea: ${achievementNames[achievementId]}`);
+            }
+            
+            saveProgress() {
+                localStorage.setItem('eduAIAchievements', JSON.stringify(this.achievements));
+            }
+            
+            loadProgress() {
+                const saved = localStorage.getItem('eduAIAchievements');
+                if (saved) {
+                    this.achievements = JSON.parse(saved);
+                }
+            }
+        }
+
+        // Inițializează sistemul de realizări
+        const achievementSystem = new AchievementSystem();
+        achievementSystem.loadProgress();
     </script>
 </body>
 </html>
