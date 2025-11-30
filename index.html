@@ -2090,7 +2090,7 @@
                     <h4>Chimie Anorganică</h4>
                     <p>Subiecte din 2024</p>
                     <p>Structura atomică, tabelul periodic, legături chimice</p>
-                    <button class="btn" style="margin-top: 1rem; background: var(--success);" onclick="loadBacSubject('anorganica-2024-var3')">
+                    <button class="btn" style="margin-top: 1rem; background: var(--success);" onclick="startBacTest('anorganica-2024-var3')">
                         <i class="fas fa-play"></i>
                         Începe Test
                     </button>
@@ -2099,7 +2099,7 @@
                     <h4>Chimie Organică</h4>
                     <p>Subiecte din 2024</p>
                     <p>Hidrocarburi, compuși organici, reacții specifice</p>
-                    <button class="btn" style="margin-top: 1rem; background: var(--warning);" onclick="loadBacSubject('organica-2024-var3')">
+                    <button class="btn" style="margin-top: 1rem; background: var(--warning);" onclick="startBacTest('organica-2024-var3')">
                         <i class="fas fa-play"></i>
                         Începe Test
                     </button>
@@ -2108,7 +2108,7 @@
                     <h4>Test Combinat</h4>
                     <p>Anorganică + Organică</p>
                     <p>Simulare completă examen BAC</p>
-                    <button class="btn" style="margin-top: 1rem; background: var(--danger);" onclick="loadBacSubject('combinat-2024')">
+                    <button class="btn" style="margin-top: 1rem; background: var(--danger);" onclick="startBacTest('combinat-2024')">
                         <i class="fas fa-play"></i>
                         Începe Test
                     </button>
@@ -3651,34 +3651,38 @@
 }
 
         // Funcție pentru verificarea răspunsului la exercițiu
-        function checkExerciseAnswer() {
-            const selectedOption = document.querySelector('.exercise-option[style*="background-color"]');
-            
-            if (!selectedOption) {
-                alert('Te rugăm să selectezi un răspuns înainte de a verifica!');
-                return;
-            }
-            
-            const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
-            
-            exerciseFeedback.textContent = isCorrect ? 
-                `✓ Corect! ${generatedExercise.currentExercise.explanation}` : 
-                `✗ Incorect. Răspunsul corect este: ${generatedExercise.currentExercise.options[generatedExercise.currentExercise.correct]}. ${generatedExercise.currentExercise.explanation}`;
-            
-            exerciseFeedback.className = `exercise-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
-            exerciseFeedback.style.display = 'block';
-            
-            if (isCorrect) {
-                showVisualRepresentation(generatedExercise.currentExercise.visual);
-            } else {
-                visualRepresentation.style.display = 'none';
-            }
-            
-            const user = JSON.parse(localStorage.getItem('eduAIUser'));
-            if (user) {
-                updateUserProgress(isCorrect);
-            }
-        }
+       function checkExerciseAnswer() {
+    const selectedOption = document.querySelector('.exercise-option[style*="background-color"]');
+    
+    if (!selectedOption) {
+        alert('Te rugăm să selectezi un răspuns înainte de a verifica!');
+        return;
+    }
+    
+    const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+    const topic = topicSelect.value; // Obține topic-ul selectat
+    
+    exerciseFeedback.textContent = isCorrect ? 
+        `✓ Corect! ${generatedExercise.currentExercise.explanation}` : 
+        `✗ Incorect. Răspunsul corect este: ${generatedExercise.currentExercise.options[generatedExercise.currentExercise.correct]}. ${generatedExercise.currentExercise.explanation}`;
+    
+    exerciseFeedback.className = `exercise-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+    exerciseFeedback.style.display = 'block';
+    
+    if (isCorrect) {
+        showVisualRepresentation(generatedExercise.currentExercise.visual);
+        
+        // ACTUALIZEAZĂ REALIZĂRILE doar pentru răspunsuri corecte
+        updateAchievementsOnExerciseComplete(true, topic);
+    } else {
+        visualRepresentation.style.display = 'none';
+    }
+    
+    const user = JSON.parse(localStorage.getItem('eduAIUser'));
+    if (user) {
+        updateUserProgress(isCorrect, topic);
+    }
+}
 
         // Funcție pentru afișarea reprezentării vizuale
         function showVisualRepresentation(visualKey) {
@@ -4172,280 +4176,550 @@
         }
 
         // Funcție pentru încărcarea subiectelor BAC
-        function loadBacSubject(subjectType) {
-            const container = document.getElementById('bac-subject-container');
-            container.innerHTML = '';
-            
-            let subjectContent = '';
-            let subjectTitle = '';
-            
-            switch(subjectType) {
-                case 'anorganica-2024-var3':
-                    subjectTitle = 'Examenul național de bacalaureat 2024 - Chimie anorganică - Varianta 3';
-                    subjectContent = `
-                        <div class="bac-subject-content">
-                            <div class="bac-header">
-                                <h2 class="bac-title">Examenul național de bacalaureat 2024</h2>
-                                <p class="bac-subtitle">Proba E. d) - Chimie anorganică</p>
-                                <p class="bac-subtitle">Varianta 3</p>
-                            </div>
-                            
-                            <div class="bac-instructions">
-                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
-                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
-                            </div>
-                            
-                            <h3>SUBIECTUL I (40 de puncte)</h3>
-                            <h4>Subiectul A</h4>
-                            <p>Itemii de la 1 la 10 se referă la compuși anorganici, ale căror formule chimice notate cu litere de la (A) la (F), sunt prezentate mai jos:</p>
-                            <p>(A) HCN<br>(B) NaOH<br>(C) HCl<br>(D) N₂<br>(E) CuSO₄<br>(F) H₂O</p>
-                            <p>Pentru fiecare item, notaţi pe foaia de examen numărul de ordine al itemului însoţit de litera corespunzătoare răspunsului corect. Fiecare item are un singur răspuns corect.</p>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">1. Numărul electronilor neparticipați la legătura chimică din molecula compusului (D) este:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. 2</div>
-                                    <div class="bac-option">b. 3</div>
-                                    <div class="bac-option">c. 4</div>
-                                    <div class="bac-option">d. 6</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: c. 4</strong></p>
-                                    <p>Explicație: În molecula de N₂ (azot), fiecare atom de azot are 5 electroni de valență. Cei 3 electroni participă la formarea legăturii triple, iar cei 2 rămași formează o pereche de electroni neparticipanți. În total, molecula are 4 electroni neparticipanți.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">2. Atomul elementului chimic comun din compoziția substanțelor (E) și (F) are:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. 4 electroni de valență</div>
-                                    <div class="bac-option">b. 4 electroni pe ultimul strat</div>
-                                    <div class="bac-option">c. 2 orbitali monoelectronici</div>
-                                    <div class="bac-option">d. 2 orbitali dielectronici</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: a. 4 electroni de valență</strong></p>
-                                    <p>Explicație: Elementul comun este oxigenul (O), care are numărul atomic 8 și configurația electronică 1s² 2s² 2p⁴, deci 6 electroni de valență. Răspunsul corect se referă la proprietățile atomului de oxigen.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Adaugă mai multe întrebări aici -->
-                            
-                            <div style="margin-top: 2rem; text-align: center;">
-                                <button class="btn" onclick="startBacTest('anorganica-2024-var3')">
-                                    <i class="fas fa-play"></i>
-                                    Începe Testul Complet
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'organica-2024-var3':
-                    subjectTitle = 'Examenul național de bacalaureat 2024 - Chimie organică - Varianta 3';
-                    subjectContent = `
-                        <div class="bac-subject-content">
-                            <div class="bac-header">
-                                <h2 class="bac-title">Examenul național de bacalaureat 2024</h2>
-                                <p class="bac-subtitle">Proba E. d) - Chimie organică</p>
-                                <p class="bac-subtitle">Varianta 3</p>
-                            </div>
-                            
-                            <div class="bac-instructions">
-                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
-                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
-                            </div>
-                            
-                            <h3>SUBIECTUL I (40 de puncte)</h3>
-                            <h4>Subiectul A</h4>
-                            <p>Itemii de la 1 la 10 se referă la compuși organici ale căror formule de structură, notate cu litere de la (A) la (F), sunt prezentate în subiect.</p>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">1. Numărul compușilor care conțin în moleculă un nucleu benzenic este egal cu:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. 1</div>
-                                    <div class="bac-option">b. 2</div>
-                                    <div class="bac-option">c. 3</div>
-                                    <div class="bac-option">d. 4</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: c. 3</strong></p>
-                                    <p>Explicație: Compușii cu nucleu benzenic sunt: acidul benzoic, nitrobenzenul și fenolul.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">2. Au în moleculă un singur atom de carbon secundar:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. (A) și (B)</div>
-                                    <div class="bac-option">b. (B) și (C)</div>
-                                    <div class="bac-option">c. (C) și (D)</div>
-                                    <div class="bac-option">d. (D) și (E)</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: b. (B) și (C)</strong></p>
-                                    <p>Explicație: Atomii de carbon secundari sunt cei legați de doi atomi de carbon. Compușii (B) și (C) au fiecare câte un singur atom de carbon secundar.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Adaugă mai multe întrebări aici -->
-                            
-                            <div style="margin-top: 2rem; text-align: center;">
-                                <button class="btn" onclick="startBacTest('organica-2024-var3')">
-                                    <i class="fas fa-play"></i>
-                                    Începe Testul Complet
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                case 'organica-2025-var1':
-                    subjectTitle = 'Examenul național de bacalaureat 2025 - Chimie organică - Varianta 1';
-                    subjectContent = `
-                        <div class="bac-subject-content">
-                            <div class="bac-header">
-                                <h2 class="bac-title">Examenul național de bacalaureat 2025</h2>
-                                <p class="bac-subtitle">Proba E. d) - Chimie organică</p>
-                                <p class="bac-subtitle">Varianta 1</p>
-                            </div>
-                            
-                            <div class="bac-instructions">
-                                <p><strong>• Toate subiectele sunt obligatorii. Se acordă zece puncte din oficiu.</strong></p>
-                                <p><strong>• Timpul de lucru efectiv este de trei ore.</strong></p>
-                            </div>
-                            
-                            <h3>SUBIECTUL I (40 de puncte)</h3>
-                            <h4>Subiectul A</h4>
-                            <p>Itemii de la 1 la 10 se referă la compuși organici ale căror formule de structură, notate cu litere de la (A) la (F), sunt prezentate în subiect.</p>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">1. Compusul organic cu cele mai puține elemente organogene în compoziție este:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. (A)</div>
-                                    <div class="bac-option">b. (C)</div>
-                                    <div class="bac-option">c. (D)</div>
-                                    <div class="bac-option">d. (F)</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: a. (A)</strong></p>
-                                    <p>Explicație: Compusul (A) conține doar carbon, hidrogen și oxigen, în timp ce celelalte compuși conțin și alte elemente organogene.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="bac-question">
-                                <div class="bac-question-title">2. Au în moleculă același număr de atomi:</div>
-                                <div class="bac-options">
-                                    <div class="bac-option">a. (A), (B) și (C)</div>
-                                    <div class="bac-option">b. (A), (C) și (D)</div>
-                                    <div class="bac-option">c. (B), (D) și (E)</div>
-                                    <div class="bac-option">d. (B), (D) și (F)</div>
-                                </div>
-                                <button class="auth-btn" onclick="toggleAnswer(this)">Arată răspunsul</button>
-                                <div class="bac-answer">
-                                    <p><strong>Răspuns corect: b. (A), (C) și (D)</strong></p>
-                                    <p>Explicație: Compușii (A), (C) și (D) au același număr de atomi în moleculă.</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Adaugă mai multe întrebări aici -->
-                            
-                            <div style="margin-top: 2rem; text-align: center;">
-                                <button class="btn" onclick="startBacTest('organica-2025-var1')">
-                                    <i class="fas fa-play"></i>
-                                    Începe Testul Complet
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                    
-                default:
-                    subjectContent = '<p>Subiectul selectat nu este disponibil momentan.</p>';
-            }
-            
-            container.innerHTML = subjectContent;
-            
-            // Scroll la subiect
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+      function loadBacSubject(subjectType) {
+    // În loc să arăți preview, începe direct testul
+    startBacTest(subjectType);
+}
 
-        // Funcție pentru afișarea/ascunderea răspunsurilor
-        function toggleAnswer(button) {
-            const answer = button.nextElementSibling;
-            if (answer.classList.contains('show')) {
-                answer.classList.remove('show');
-                button.textContent = 'Arată răspunsul';
-            } else {
-                answer.classList.add('show');
-                button.textContent = 'Ascunde răspunsul';
-            }
-        }
+// Funcție pentru începerea testului BAC
+function startBacTest(testType) {
+    // Ascunde pagina curentă și arată pagina de test
+    showPage('test-page');
+    
+    // Inițializează testul BAC cu subiectul selectat
+    initializeBacTest(testType);
+    
+    alert(`Testul BAC ${testType} a început! Ai 3 ore la dispoziție.`);
+}
 
-        // Funcție pentru începerea testului BAC
-        function startBacTest(testType) {
-            alert(`Testul ${testType} a început! Această funcționalitate va fi implementată complet în versiunea finală.`);
-            // Aici s-ar putea implementa logica completă pentru testul BAC
-        }
+// Funcție pentru inițializarea testului BAC
+function initializeBacTest(testType) {
+    // Resetează starea testului
+    testState = {
+        currentQuestionIndex: 0,
+        userAnswers: [],
+        questions: [],
+        score: 0,
+        categoryScores: {},
+        testType: testType,
+        startTime: new Date()
+    };
+    
+    // Încarcă întrebările pentru testul BAC selectat
+    loadBacQuestions(testType);
+    
+    // Afișează prima întrebare
+    displayTestQuestion(0);
+}
 
+// Funcție pentru încărcarea întrebărilor BAC
+function loadBacQuestions(testType) {
+    switch(testType) {
+        case 'anorganica-2024-var3':
+            testState.questions = [
+                {
+                    question: "1. Numărul electronilor neparticipați la legătura chimică din molecula compusului N₂ este:",
+                    options: ["a. 2", "b. 3", "c. 4", "d. 6"],
+                    correct: 2,
+                    explanation: "În molecula de N₂, fiecare atom are 2 electroni neparticipanți, deci total 4.",
+                    points: 3
+                },
+                {
+                    question: "2. Atomul elementului chimic comun din compoziția substanțelor CuSO₄ și H₂O are:",
+                    options: ["a. 4 electroni de valență", "b. 4 electroni pe ultimul strat", "c. 2 orbitali monoelectronici", "d. 2 orbitali dielectronici"],
+                    correct: 0,
+                    explanation: "Elementul comun este oxigenul cu 6 electroni de valență.",
+                    points: 3
+                },
+                {
+                    question: "3. Despre compusul NaOH este adevărat că:",
+                    options: ["a. este o bază mai slabă decât amoniacul", "b. nu ionizează în soluție apoasă", "c. reacționează rapid cu HCl", "d. se dizolvă în apă cu absorbție de căldură"],
+                    correct: 2,
+                    explanation: "NaOH reacționează rapid cu HCl formând NaCl și apă.",
+                    points: 3
+                },
+                {
+                    question: "4. Despre compusul HCl este adevărat că:",
+                    options: ["a. are în moleculă electroni neparticipanți", "b. baza sa conjugată este ionul H₃O⁺", "c. este un acid mai slab decât HCN", "d. ionizează parțial în soluție apoasă"],
+                    correct: 0,
+                    explanation: "HCl are electroni neparticipanți pe atomul de clor.",
+                    points: 3
+                },
+                {
+                    question: "5. Pila Daniell, la a cărei construcție se utilizează și CuSO₄ are:",
+                    options: ["a. anodul confecționat din cupru", "b. catodul confecționat din zinc", "c. soluție de CuSO₄ în semicelula cuprului", "d. soluție de CuSO₄ în semicelula zincului"],
+                    correct: 2,
+                    explanation: "Soluția de CuSO₄ se află în semicelula cuprului.",
+                    points: 3
+                }
+                // Adaugă mai multe întrebări aici...
+            ];
+            break;
+            
+        case 'organica-2024-var3':
+            testState.questions = [
+                {
+                    question: "1. Numărul compușilor care conțin în moleculă un nucleu benzenic este egal cu:",
+                    options: ["a. 1", "b. 2", "c. 3", "d. 4"],
+                    correct: 2,
+                    explanation: "Trei compuși au nucleu benzenic.",
+                    points: 3
+                },
+                {
+                    question: "2. Au în moleculă un singur atom de carbon secundar:",
+                    options: ["a. (A) și (B)", "b. (B) și (C)", "c. (C) și (D)", "d. (D) și (E)"],
+                    correct: 1,
+                    explanation: "Compușii (B) și (C) au câte un atom de carbon secundar.",
+                    points: 3
+                },
+                {
+                    question: "3. Este un compus cu caracter amfoter:",
+                    options: ["a. (A)", "b. (C)", "c. (D)", "d. (E)"],
+                    correct: 1,
+                    explanation: "Compusul (C) are caracter amfoter.",
+                    points: 3
+                },
+                {
+                    question: "4. Compusul organic (B), are în moleculă:",
+                    options: ["a. doi atomi de carbon primar", "b. doi atomi de carbon cuaternar", "c. două legături covalente duble carbon-oxigen", "d. două legături covalente hidrogen-oxigen"],
+                    correct: 2,
+                    explanation: "Compusul (B) are două legături duble C=O.",
+                    points: 3
+                },
+                {
+                    question: "5. Compusul organic (E):",
+                    options: ["a. este policlorura de vinil", "b. este monomer vinilic", "c. poate fi utilizat la obținerea unor adezivi", "d. poate fi utilizat la obținerea unor fibre sintetice"],
+                    correct: 1,
+                    explanation: "Compusul (E) este monomer vinilic.",
+                    points: 3
+                }
+                // Adaugă mai multe întrebări aici...
+            ];
+            break;
+            
+        case 'organica-2025-var1':
+            testState.questions = [
+                {
+                    question: "1. Compusul organic cu cele mai puține elemente organogene în compoziție este:",
+                    options: ["a. (A)", "b. (C)", "c. (D)", "d. (F)"],
+                    correct: 0,
+                    explanation: "Compusul (A) conține doar C, H și O.",
+                    points: 3
+                },
+                {
+                    question: "2. Au în moleculă același număr de atomi:",
+                    options: ["a. (A), (B) și (C)", "b. (A), (C) și (D)", "c. (B), (D) și (E)", "d. (B), (D) și (F)"],
+                    correct: 1,
+                    explanation: "Compușii (A), (C) și (D) au același număr de atomi.",
+                    points: 3
+                },
+                {
+                    question: "3. Numărul compușilor care au în moleculă doi atomi de carbon primar, este:",
+                    options: ["a. 4", "b. 3", "c. 2", "d. 1"],
+                    correct: 1,
+                    explanation: "Trei compuși au doi atomi de carbon primar.",
+                    points: 3
+                },
+                {
+                    question: "4. Este fals că:",
+                    options: ["a. (A) este un alcool trihidroxilic", "b. (D) este izopropilbenzenul", "c. (E) este stearatul de sodiu", "d. (F) este o tripeptidă mixtă"],
+                    correct: 3,
+                    explanation: "(F) nu este tripeptidă mixtă.",
+                    points: 3
+                },
+                {
+                    question: "5. Este adevărat că:",
+                    options: ["a. (A) este insolubilă în apă", "b. (B) se utilizează la fabricarea aspirinei", "c. (C) are în moleculă un atom de carbon terțiar", "d. (E) are în structură o parte hidrofobă ce conține oxigen"],
+                    correct: 1,
+                    explanation: "Compusul (B) este acidul acetilsalicilic (aspirina).",
+                    points: 3
+                }
+                // Adaugă mai multe întrebări aici...
+            ];
+            break;
+            
+        default:
+            testState.questions = [
+                {
+                    question: "Întrebare default - Subiectul nu este disponibil",
+                    options: ["Opțiune A", "Opțiune B", "Opțiune C", "Opțiune D"],
+                    correct: 0,
+                    explanation: "Acesta este un subiect placeholder.",
+                    points: 1
+                }
+            ];
+    }
+}
+
+       function toggleAnswer(button) {
+    const answer = button.nextElementSibling;
+    if (answer.classList.contains('show')) {
+        answer.classList.remove('show');
+        button.textContent = 'Arată răspunsul';
+    } else {
+        answer.classList.add('show');
+        button.textContent = 'Ascunde răspunsul';
+    }
+}
+       
+
+        
         // Sistem de realizări pentru liceeni
-        class AchievementSystem {
-            constructor() {
-                this.achievements = {
-                    'atom-master': { unlocked: false, progress: 0, target: 10 },
-                    'reaction-pro': { unlocked: false, progress: 0, target: 20 },
-                    'bac-ready': { unlocked: false, progress: 0, target: 5 }
-                };
+
+class AchievementSystem {
+    constructor() {
+        this.achievements = {
+            'atom-master': { 
+                unlocked: false, 
+                progress: 0, 
+                target: 10,
+                name: 'Maestrul Atomilor',
+                description: 'Finalizează 10 exerciții despre structura atomică',
+                icon: 'fas fa-atom'
+            },
+            'reaction-pro': { 
+                unlocked: false, 
+                progress: 0, 
+                target: 10,
+                name: 'Expert în Reacții',
+                description: 'Echilibrează 10 de ecuații chimice',
+                icon: 'fas fa-vial'
+            },
+            'bac-ready': { 
+                unlocked: false, 
+                progress: 0, 
+                target: 1,
+                name: 'Pregătit pentru BAC',
+                description: 'Completează 1 teste simulate BAC',
+                icon: 'fas fa-graduation-cap'
+            },
+            'exercise-master': {
+                unlocked: false,
+                progress: 0,
+                target: 50,
+                name: 'Maestrul Exercițiilor',
+                description: 'Rezolvă 50 de exerciții',
+                icon: 'fas fa-dumbbell'
+            },
+            'test-champion': {
+                unlocked: false,
+                progress: 0,
+                target: 2,
+                name: 'Campionul Testelor',
+                description: 'Completează 2 teste',
+                icon: 'fas fa-trophy'
+            }
+        };
+    }
+     resetAchievements() {
+        Object.keys(this.achievements).forEach(achievementId => {
+            this.achievements[achievementId].progress = 0;
+            this.achievements[achievementId].unlocked = false;
+        });
+        this.saveProgress();
+        console.log("✅ Realizările au fost resetate la deconectare");
+    }
+    updateProgress(achievementId, increment = 1) {
+        if (this.achievements[achievementId]) {
+            const achievement = this.achievements[achievementId];
+            const oldProgress = achievement.progress;
+            
+            achievement.progress += increment;
+            
+            // Limitează progresul la target
+            if (achievement.progress > achievement.target) {
+                achievement.progress = achievement.target;
             }
             
-            updateProgress(achievementId, increment = 1) {
-                if (this.achievements[achievementId]) {
-                    this.achievements[achievementId].progress += increment;
-                    
-                    if (this.achievements[achievementId].progress >= this.achievements[achievementId].target) {
-                        this.unlockAchievement(achievementId);
-                    }
-                    
-                    this.saveProgress();
+            // Verifică dacă s-a deblocat o realizare
+            if (!achievement.unlocked && achievement.progress >= achievement.target) {
+                this.unlockAchievement(achievementId);
+            }
+            
+            // Salvează progresul și actualizează UI-ul
+            this.saveProgress();
+            this.updateAchievementUI(achievementId, oldProgress);
+        }
+    }
+    
+    unlockAchievement(achievementId) {
+        this.achievements[achievementId].unlocked = true;
+        this.showAchievementNotification(achievementId);
+    }
+    
+    showAchievementNotification(achievementId) {
+        const achievement = this.achievements[achievementId];
+        
+        // Creează o notificare frumoasă
+        const notification = document.createElement('div');
+        notification.className = 'achievement-notification';
+        notification.innerHTML = `
+            <div class="achievement-notification-content">
+                <div class="achievement-icon">
+                    <i class="${achievement.icon}"></i>
+                </div>
+                <div class="achievement-text">
+                    <h4>Realizare deblocată!</h4>
+                    <h3>${achievement.name}</h3>
+                    <p>${achievement.description}</p>
+                </div>
+            </div>
+        `;
+        
+        // Adaugă notificarea în pagină
+        document.body.appendChild(notification);
+        
+        // Animație de intrare
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        // Elimină notificarea după 5 secunde
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
                 }
+            }, 500);
+        }, 5000);
+        
+        console.log(`🎉 Felicitări! Ai deblocat realizarea: ${achievement.name}`);
+    }
+    
+     updateAchievementUI(achievementId, oldProgress) {
+        // Actualizează progresul în UI
+        const achievementElement = document.querySelector(`[data-badge="${achievementId}"]`);
+        if (achievementElement) {
+            const achievement = this.achievements[achievementId];
+            const progressPercentage = (achievement.progress / achievement.target) * 100;
+            
+            // Actualizează clasa pentru realizări deblocate
+            if (achievement.unlocked) {
+                achievementElement.classList.add('unlocked');
             }
             
-            unlockAchievement(achievementId) {
-                this.achievements[achievementId].unlocked = true;
-                this.showAchievementNotification(achievementId);
-            }
-            
-            showAchievementNotification(achievementId) {
-                const achievementNames = {
-                    'atom-master': 'Maestrul Atomilor',
-                    'reaction-pro': 'Expert în Reacții', 
-                    'bac-ready': 'Pregătit pentru BAC'
-                };
-                
-                // Poți adăuga o notificare frumoasă aici
-                console.log(`Felicitări! Ai deblocat realizarea: ${achievementNames[achievementId]}`);
-            }
-            
-            saveProgress() {
-                localStorage.setItem('eduAIAchievements', JSON.stringify(this.achievements));
-            }
-            
-            loadProgress() {
-                const saved = localStorage.getItem('eduAIAchievements');
-                if (saved) {
-                    this.achievements = JSON.parse(saved);
-                }
+            // Actualizează textul de progres
+            const progressText = achievementElement.querySelector('small');
+            if (progressText) {
+                progressText.textContent = `${achievement.progress}/${achievement.target} - ${achievement.description}`;
             }
         }
+    }
+    
+    updateFromUserProgress(userProgress) {
+        if (!userProgress) return;
+        
+        // Actualizează realizările pe baza progresului
+        this.updateProgress('exercise-master', userProgress.exercisesCompleted);
+        this.updateProgress('test-champion', userProgress.testCompleted ? 1 : 0);
+    }
+    
+    saveProgress() {
+        localStorage.setItem('eduAIAchievements', JSON.stringify(this.achievements));
+    }
+    
+    loadProgress() {
+        const saved = localStorage.getItem('eduAIAchievements');
+        if (saved) {
+            this.achievements = JSON.parse(saved);
+            // Actualizează UI-ul pentru toate realizările
+            Object.keys(this.achievements).forEach(achievementId => {
+                this.updateAchievementUI(achievementId, 0);
+            });
+        }
+    }
+}
+logoutBtn.addEventListener('click', function() {
+    // RESETEAZĂ REALIZĂRILE la deconectare
+    achievementSystem.resetAchievements();
+    
+    localStorage.removeItem('eduAIUser');
+    hideUserInfo();
+    showPage('dashboard-page');
+    alert('Te-ai deconectat cu succes!');
+});
 
-        // Inițializează sistemul de realizări
-        const achievementSystem = new AchievementSystem();
-        achievementSystem.loadProgress();
+// Stiluri CSS pentru notificările de realizări
+const achievementStyles = `
+    .achievement-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        transform: translateX(400px);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 350px;
+    }
+    
+    .achievement-notification.show {
+        transform: translateX(0);
+    }
+    
+    .achievement-notification-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .achievement-icon {
+        font-size: 2rem;
+        background: rgba(255, 255, 255, 0.2);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .achievement-text h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    .achievement-text h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+    }
+    
+    .achievement-text p {
+        margin: 0;
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+    
+    .achievement.unlocked {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-color: #ffd700;
+        transform: scale(1.05);
+    }
+    
+    .achievement.unlocked i {
+        color: #ffd700;
+    }
+`;
+
+// Adaugă stilurile în pagină
+const styleSheet = document.createElement('style');
+styleSheet.textContent = achievementStyles;
+document.head.appendChild(styleSheet);
+
+// Inițializează sistemul de realizări
+const achievementSystem = new AchievementSystem();
+achievementSystem.loadProgress();
+
+// Funcție pentru a actualiza realizările când se completează un exercițiu
+function updateAchievementsOnExerciseComplete(isCorrect, topic) {
+    if (!isCorrect) return; // Doar pentru răspunsuri corecte
+    
+    // Incrementă realizarea generală de exerciții
+    achievementSystem.updateProgress('exercise-master', 1);
+    
+    // Incrementă realizările specifice pe topic
+    if (topic === 'atomi') {
+        achievementSystem.updateProgress('atom-master', 1);
+        console.log(`Progres atom-master: ${achievementSystem.achievements['atom-master'].progress}/10`);
+    }
+    if (topic === 'ecuatii' || topic === 'reactii') {
+        achievementSystem.updateProgress('reaction-pro', 1);
+    }
+}
+function checkCurrentAchievements() {
+    console.log("=== PROGRES REALIZĂRI ===");
+    console.log(`atom-master: ${achievementSystem.achievements['atom-master'].progress}/10`);
+    console.log(`exercise-master: ${achievementSystem.achievements['exercise-master'].progress}/50`);
+    console.log(`reaction-pro: ${achievementSystem.achievements['reaction-pro'].progress}/20`);
+    console.log("========================");
+}
+
+
+// Funcție pentru a actualiza realizările când se completează un test
+function updateAchievementsOnTestComplete() {
+    achievementSystem.updateProgress('test-champion', 1);
+}
+
+// Funcție pentru a actualiza realizările când se completează un test BAC
+function updateAchievementsOnBacComplete() {
+    achievementSystem.updateProgress('bac-ready', 1);
+}
+
+// Modifică funcția updateUserProgress pentru a include realizările
+function updateUserProgress(isCorrect, topic) {
+    let userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
+    
+    if (userProgress) {
+        userProgress.exercisesCompleted += 1;
+        
+        // ACTUALIZEAZĂ REALIZĂRILE
+        updateAchievementsOnExerciseComplete(isCorrect, topic);
+        
+        const currentScore = userProgress.averageScore;
+        const newScore = isCorrect ? 
+            Math.min(currentScore + 2, 100) : 
+            Math.max(currentScore - 1, 0);
+        userProgress.averageScore = newScore;
+        
+        userProgress.levelProgress = Math.min(userProgress.levelProgress + (isCorrect ? 2 : 0.5), 100);
+        
+        if (userProgress.levelProgress >= 100) {
+            if (userProgress.level === 'beginner') {
+                userProgress.level = 'intermediate';
+                userProgress.levelProgress = 0;
+            } else if (userProgress.level === 'intermediate') {
+                userProgress.level = 'advanced';
+                userProgress.levelProgress = 0;
+            }
+        }
+        
+        localStorage.setItem('eduAIUserProgress', JSON.stringify(userProgress));
+        updateProgressUI(userProgress);
+    }
+}
+
+// Modifică funcția finishTest pentru a include realizările
+function finishTest() {
+    let correctCount = 0;
+    testState.questions.forEach((question, index) => {
+        if (testState.userAnswers[index] === question.correct) {
+            correctCount++;
+            if (testState.categoryScores[question.category] !== undefined) {
+                testState.categoryScores[question.category]++;
+            }
+        }
+    });
+    
+    testState.score = (correctCount / testState.questions.length) * 100;
+    
+    correctAnswers.textContent = correctCount;
+    testScore.textContent = `${Math.round(testState.score)}%`;
+    
+    // ACTUALIZEAZĂ REALIZĂRILE PENTRU TEST
+    updateAchievementsOnTestComplete();
+     if (testState.testType && testState.testType.includes('bac')) {
+        updateAchievementsOnBacComplete();
+    }
+    
+    showTestResults(testState.score, testState.categoryScores);
+    updateUserProgressAfterTest(testState.score, testState.categoryScores);
+}
+
+// Actualizează realizările la încărcarea paginii
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem('eduAIUser'));
+    if (user) {
+        const userProgress = JSON.parse(localStorage.getItem('eduAIUserProgress'));
+        if (userProgress) {
+            achievementSystem.updateFromUserProgress(userProgress);
+        }
+    }
+});
     </script>
 </body>
 </html>
